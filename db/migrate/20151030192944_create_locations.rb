@@ -3,7 +3,7 @@ class CreateLocations < ActiveRecord::Migration
     create_table :locations do |t|
       t.string :street
       t.string :city
-      t.varchar :zipcode
+      t.string :zipcode
       t.string :country
       t.integer :locatable_id
       t.string  :locatable_type
