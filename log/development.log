@@ -435,3 +435,2106 @@ Processing by HomeController#index as HTML
   Rendered home/index.html.erb within layouts/application (0.1ms)
   [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
 Completed 200 OK in 46ms (Views: 45.0ms | ActiveRecord: 0.2ms)
+  [1m[36m (38.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (2.9ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20151030190701)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (29.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190701"]]
+  [1m[36m (7.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerks (20151030190811)
+  [1m[35m (11.9ms)[0m  BEGIN
+  [1m[36m (14.7ms)[0m  [1mCREATE TABLE "perks" ("id" serial primary key, "title" character varying, "discount" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190811"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerksUsers (20151030191143)
+  [1m[35m (6.5ms)[0m  BEGIN
+  [1m[36m (14.6ms)[0m  [1mCREATE TABLE "perks_users" ("id" serial primary key, "perk_id" integer, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191143"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBrands (20151030191407)
+  [1m[35m (10.9ms)[0m  BEGIN
+  [1m[36m (15.4ms)[0m  [1mCREATE TABLE "brands" ("id" serial primary key, "brand_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191407"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategories (20151030191525)
+  [1m[35m (11.2ms)[0m  BEGIN
+  [1m[36m (21.0ms)[0m  [1mCREATE TABLE "categories" ("id" serial primary key, "cat_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191525"]]
+  [1m[36m (12.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategoriesPerks (20151030191603)
+  [1m[35m (5.9ms)[0m  BEGIN
+  [1m[36m (15.1ms)[0m  [1mCREATE TABLE "categories_perks" ("id" serial primary key, "category_id" integer, "perk_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191603"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateLocations (20151030192944)
+  [1m[35m (5.9ms)[0m  BEGIN
+  [1m[36m (18.5ms)[0m  [1mCREATE TABLE "locations" ("id" serial primary key, "street" character varying, "city" character varying, "zipcode" character varying, "country" character varying, "locatable_id" integer, "locatable_type" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030192944"]]
+  [1m[36m (3.8ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20151030195125)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (22.1ms)[0m  [1mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (3.7ms)[0m  ALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" timestamp
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (6.9ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" timestamp
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" character varying
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151030195125"]]
+  [1m[35m (6.2ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.5ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'brands'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories_perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'locations'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.1ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+
+
+Started GET "/" for ::1 at 2015-10-30 14:56:11 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.8ms)
+  [1m[35mUser Load (19.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 689ms (Views: 649.2ms | ActiveRecord: 22.9ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2015-10-30 14:56:14 -0700
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (37.3ms)
+Completed 200 OK in 97ms (Views: 80.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2015-10-30 14:56:34 -0700
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"I7oGoppUp6DdMQNwOBWgFGztayN09ABGQdCU4JTEVRL/a3zFOpCSMtWxLZMEX+L8kuo+8CtnHwrfv18NS5LDRQ==", "user"=>{"username"=>"nruthy2687", "first_name"=>"nruthya", "last_name"=>"sai", "email"=>"nruthya@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'nruthya@gmail.com' LIMIT 1
+  [1m[36mUser Exists (14.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('nruthy2687') LIMIT 1[0m
+  [1m[35mSQL (5.2ms)[0m  INSERT INTO "users" ("username", "first_name", "last_name", "email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["username", "nruthy2687"], ["first_name", "nruthya"], ["last_name", "sai"], ["email", "nruthya@gmail.com"], ["encrypted_password", "$2a$10$N54naninSnzJBhLFulQb5eGC1TS2rsBEfio7Rlqqiz4NYGcYD7FJ6"], ["created_at", "2015-10-30 21:56:35.071194"], ["updated_at", "2015-10-30 21:56:35.071194"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "last_sign_in_ip" = $3, "current_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = $7[0m  [["last_sign_in_at", "2015-10-30 21:56:35.080536"], ["current_sign_in_at", "2015-10-30 21:56:35.080536"], ["last_sign_in_ip", "::1"], ["current_sign_in_ip", "::1"], ["sign_in_count", 1], ["updated_at", "2015-10-30 21:56:35.081494"], ["id", 1]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 182ms (ActiveRecord: 21.3ms)
+
+
+Started GET "/" for ::1 at 2015-10-30 14:56:35 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.1ms)
+  [1m[36mUser Load (7.9ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 110ms (Views: 101.4ms | ActiveRecord: 7.9ms)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2015-10-30 14:56:37 -0700
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"IgtHAfn2D8dVbQvIqw+b7SM7h6RjiNF84I/gkd8liUj+2j1mWTI6VV3tJSuXRdkF3TzSdzwbzjB+4Ct8AHMfHw=="}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 11ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for ::1 at 2015-10-30 14:56:37 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 35ms (Views: 34.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2015-10-30 14:56:38 -0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 53ms (Views: 51.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2015-10-30 14:56:45 -0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yrn0LN1D2x/ahr3KRMzKIOwEuSn787TCtXKz6IrsTGwP4aA7RvV6cJeaT6Ak0lv2GligfCYfqiLDLwKi1tYwgg==", "user"=>{"email"=>"nruthya@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "nruthya@gmail.com"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "current_sign_in_at" = $1, "sign_in_count" = $2, "updated_at" = $3 WHERE "users"."id" = $4[0m  [["current_sign_in_at", "2015-10-30 21:56:45.358751"], ["sign_in_count", 2], ["updated_at", "2015-10-30 21:56:45.360370"], ["id", 1]]
+  [1m[35m (7.5ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 130ms (ActiveRecord: 8.5ms)
+
+
+Started GET "/" for ::1 at 2015-10-30 14:56:45 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 37ms (Views: 36.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2015-10-30 15:24:41 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.7ms)
+  [1m[35mUser Load (1.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 200 OK in 502ms (Views: 479.5ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/" for ::1 at 2015-10-30 15:24:43 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.1ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 41ms (Views: 39.0ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2015-10-30 15:24:45 -0700
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"I4cWXSwjWnD/Rnm/o9taK469rEOXyt1R3E8GoR0u426kPquDf9D1kz/PFRVErRf4vV5prczAoBowfaHGga62fg=="}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 92ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for ::1 at 2015-10-30 15:24:45 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 44ms (Views: 42.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/perks" for ::1 at 2015-10-30 15:26:55 -0700
+
+ActionController::RoutingError (No route matches [GET] "/perks"):
+  actionpack (4.2.4) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.4) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.4) lib/rails/engine.rb:518:in `call'
+  railties (4.2.4) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.7ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (10.8ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (54.3ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (25.0ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (52.2ms)
+
+
+Started GET "/" for ::1 at 2015-10-30 15:27:27 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 40ms (Views: 39.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2015-10-30 15:27:28 -0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (2.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 63ms (Views: 60.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2015-10-30 15:27:41 -0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Nc6v97wiNWWxM4eE/O3GcOcJqrxZD/dzL8HnVLUsF7O9EVYEkqdsFlTd9vhtwjLgSQwA7eYuSiXXCo2DNMn+gw==", "user"=>{"email"=>"nruthya@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "nruthya@gmail.com"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "users"."id" = $5[0m  [["last_sign_in_at", "2015-10-30 21:56:45.358751"], ["current_sign_in_at", "2015-10-30 22:27:41.736700"], ["sign_in_count", 3], ["updated_at", "2015-10-30 22:27:41.738599"], ["id", 1]]
+  [1m[35m (9.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 249ms (ActiveRecord: 10.8ms)
+
+
+Started GET "/" for ::1 at 2015-10-30 15:27:41 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.1ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 38ms (Views: 36.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/perks" for ::1 at 2015-10-30 15:27:47 -0700
+
+ActionController::RoutingError (No route matches [GET] "/perks"):
+  actionpack (4.2.4) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.4) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.4) lib/rails/engine.rb:518:in `call'
+  railties (4.2.4) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.4ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.6ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (36.2ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (22.0ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (47.7ms)
+
+
+Started GET "/users" for ::1 at 2015-10-30 15:28:03 -0700
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.2.4) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.4) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.4) lib/rails/engine.rb:518:in `call'
+  railties (4.2.4) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.8ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.6ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (43.0ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (20.8ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (46.9ms)
+  [1m[36m (15.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (24.4ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20151030190701)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (21.5ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190701"]]
+  [1m[36m (6.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerks (20151030190811)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (19.2ms)[0m  [1mCREATE TABLE "perks" ("id" serial primary key, "title" character varying, "discount" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190811"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerksUsers (20151030191143)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (14.2ms)[0m  [1mCREATE TABLE "perks_users" ("id" serial primary key, "user_id" integer, "perk_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX  "index_perks_users_on_user_id" ON "perks_users"  ("user_id")
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX  "index_perks_users_on_perk_id" ON "perks_users"  ("perk_id")[0m
+  [1m[35m (9.2ms)[0m  ALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_a2af260ecc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (1.1ms)[0m  [1mALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_76292e19fe"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191143"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBrands (20151030191407)
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (6.1ms)[0m  [1mCREATE TABLE "brands" ("id" serial primary key, "brand_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191407"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategories (20151030191525)
+  [1m[35m (5.6ms)[0m  BEGIN
+  [1m[36m (14.3ms)[0m  [1mCREATE TABLE "categories" ("id" serial primary key, "cat_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191525"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategoriesPerks (20151030191603)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (8.5ms)[0m  [1mCREATE TABLE "categories_perks" ("id" serial primary key, "perk_id" integer, "category_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.3ms)[0m  CREATE  INDEX  "index_categories_perks_on_perk_id" ON "categories_perks"  ("perk_id")
+  [1m[36m (1.4ms)[0m  [1mCREATE  INDEX  "index_categories_perks_on_category_id" ON "categories_perks"  ("category_id")[0m
+  [1m[35m (2.5ms)[0m  ALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_af4e10ca51"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_9fb05bc4ce"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191603"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateLocations (20151030192944)
+  [1m[35m (11.7ms)[0m  BEGIN
+  [1m[36m (9.2ms)[0m  [1mCREATE TABLE "locations" ("id" serial primary key, "street" character varying, "city" character varying, "zipcode" character varying, "country" character varying, "locatable_id" integer, "locatable_type" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030192944"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20151030195125)
+  [1m[35m (6.1ms)[0m  BEGIN
+  [1m[36m (21.1ms)[0m  [1mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (6.4ms)[0m  ALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL
+  [1m[36m (0.9ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" timestamp
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (4.4ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" timestamp
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" character varying
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.3ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151030195125"]]
+  [1m[35m (3.8ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (4.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'brands'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.3ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (3.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories_perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.1ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'locations'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.1ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+
+
+Started GET "/users" for ::1 at 2015-10-30 17:17:03 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (12.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (2.9ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (98.1ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 585ms (Views: 537.0ms | ActiveRecord: 25.8ms)
+
+
+Started GET "/perks" for ::1 at 2015-10-30 17:17:18 -0700
+Processing by PerksController#index as HTML
+  [1m[35mPerk Load (6.6ms)[0m  SELECT "perks".* FROM "perks"
+  Rendered perks/index.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 130ms (Views: 108.6ms | ActiveRecord: 7.3ms)
+
+
+Started GET "/perks/1" for ::1 at 2015-10-30 17:17:22 -0700
+Processing by PerksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPerk Load (0.4ms)[0m  [1mSELECT  "perks".* FROM "perks" WHERE "perks"."id" = $1 LIMIT 1[0m  [["id", 1]]
+Completed 404 Not Found in 7ms (ActiveRecord: 1.3ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Perk with 'id'=1):
+  app/controllers/perks_controller.rb:67:in `set_perk'
+
+
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.0ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (36.0ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (1.4ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (29.2ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (1.1ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/nruthya/.rbenv/versions/2.0.0-p643/lib/ruby/gems/2.0.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (81.7ms)
+
+
+Started GET "/" for ::1 at 2015-10-30 17:18:48 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 104ms (Views: 103.1ms | ActiveRecord: 0.0ms)
+  [1m[36m (33.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (12.1ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20151030190701)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (30.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "username" character varying, "address" character varying, "city" character varying, "zipcode" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (22.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190701"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerks (20151030190811)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (16.7ms)[0m  [1mCREATE TABLE "perks" ("id" serial primary key, "title" character varying, "discount" character varying, "address" character varying, "zipcode" character varying, "city" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190811"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerksUsers (20151030191143)
+  [1m[35m (5.8ms)[0m  BEGIN
+  [1m[36m (9.1ms)[0m  [1mCREATE TABLE "perks_users" ("id" serial primary key, "user_id" integer, "perk_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.6ms)[0m  CREATE  INDEX  "index_perks_users_on_user_id" ON "perks_users"  ("user_id")
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX  "index_perks_users_on_perk_id" ON "perks_users"  ("perk_id")[0m
+  [1m[35m (5.4ms)[0m  ALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_a2af260ecc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_76292e19fe"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191143"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBrands (20151030191407)
+  [1m[35m (5.7ms)[0m  BEGIN
+  [1m[36m (20.8ms)[0m  [1mCREATE TABLE "brands" ("id" serial primary key, "brand_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191407"]]
+  [1m[36m (2.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategories (20151030191525)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (17.7ms)[0m  [1mCREATE TABLE "categories" ("id" serial primary key, "cat_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191525"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategoriesPerks (20151030191603)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (14.1ms)[0m  [1mCREATE TABLE "categories_perks" ("id" serial primary key, "perk_id" integer, "category_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.4ms)[0m  CREATE  INDEX  "index_categories_perks_on_perk_id" ON "categories_perks"  ("perk_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE  INDEX  "index_categories_perks_on_category_id" ON "categories_perks"  ("category_id")[0m
+  [1m[35m (1.7ms)[0m  ALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_af4e10ca51"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+
+  [1m[36m (1.7ms)[0m  [1mALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_9fb05bc4ce"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191603"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20151030195125)
+  [1m[35m (11.9ms)[0m  BEGIN
+  [1m[36m (12.4ms)[0m  [1mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (4.3ms)[0m  ALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" timestamp
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (8.1ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" timestamp
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" character varying
+  [1m[36m (1.3ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.3ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151030195125"]]
+  [1m[35m (2.3ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.9ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'brands'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.6ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories_perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36m (35.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (12.2ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20151030190701)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (29.1ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "username" character varying, "address" character varying, "city" character varying, "zipcode" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (23.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190701"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerks (20151030190811)
+  [1m[35m (6.1ms)[0m  BEGIN
+  [1m[36m (15.3ms)[0m  [1mCREATE TABLE "perks" ("id" serial primary key, "title" character varying, "discount" character varying, "address" character varying, "zipcode" character varying, "city" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190811"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerksUsers (20151030191143)
+  [1m[35m (5.5ms)[0m  BEGIN
+  [1m[36m (8.8ms)[0m  [1mCREATE TABLE "perks_users" ("id" serial primary key, "user_id" integer, "perk_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (6.5ms)[0m  CREATE  INDEX  "index_perks_users_on_user_id" ON "perks_users"  ("user_id")
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX  "index_perks_users_on_perk_id" ON "perks_users"  ("perk_id")[0m
+  [1m[35m (5.1ms)[0m  ALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_a2af260ecc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (1.1ms)[0m  [1mALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_76292e19fe"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191143"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBrands (20151030191407)
+  [1m[35m (5.7ms)[0m  BEGIN
+  [1m[36m (14.8ms)[0m  [1mCREATE TABLE "brands" ("id" serial primary key, "brand_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191407"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategories (20151030191525)
+  [1m[35m (11.9ms)[0m  BEGIN
+  [1m[36m (13.8ms)[0m  [1mCREATE TABLE "categories" ("id" serial primary key, "cat_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191525"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategoriesPerks (20151030191603)
+  [1m[35m (11.7ms)[0m  BEGIN
+  [1m[36m (8.1ms)[0m  [1mCREATE TABLE "categories_perks" ("id" serial primary key, "perk_id" integer, "category_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.3ms)[0m  CREATE  INDEX  "index_categories_perks_on_perk_id" ON "categories_perks"  ("perk_id")
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX  "index_categories_perks_on_category_id" ON "categories_perks"  ("category_id")[0m
+  [1m[35m (2.5ms)[0m  ALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_af4e10ca51"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+
+  [1m[36m (1.2ms)[0m  [1mALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_9fb05bc4ce"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191603"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20151030195125)
+  [1m[35m (5.7ms)[0m  BEGIN
+  [1m[36m (16.5ms)[0m  [1mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (5.0ms)[0m  ALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" timestamp
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (4.3ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" timestamp
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" character varying
+  [1m[36m (1.0ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151030195125"]]
+  [1m[35m (1.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.8ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'brands'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.5ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories_perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.1ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.4ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (21.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (18.0ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20151030190701)
+  [1m[35m (0.8ms)[0m  BEGIN
+  [1m[36m (21.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "username" character varying, "address" character varying, "city" character varying, "zipcode" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190701"]]
+  [1m[36m (12.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerks (20151030190811)
+  [1m[35m (5.7ms)[0m  BEGIN
+  [1m[36m (20.8ms)[0m  [1mCREATE TABLE "perks" ("id" serial primary key, "title" character varying, "discount" character varying, "address" character varying, "zipcode" character varying, "city" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190811"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerksUsers (20151030191143)
+  [1m[35m (9.9ms)[0m  BEGIN
+  [1m[36m (17.4ms)[0m  [1mCREATE TABLE "perks_users" ("id" serial primary key, "user_id" integer, "perk_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_perks_users_on_user_id" ON "perks_users"  ("user_id")
+  [1m[36m (0.9ms)[0m  [1mCREATE  INDEX  "index_perks_users_on_perk_id" ON "perks_users"  ("perk_id")[0m
+  [1m[35m (1.7ms)[0m  ALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_a2af260ecc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (1.8ms)[0m  [1mALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_76292e19fe"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191143"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBrands (20151030191407)
+  [1m[35m (6.1ms)[0m  BEGIN
+  [1m[36m (41.9ms)[0m  [1mCREATE TABLE "brands" ("id" serial primary key, "brand_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191407"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategories (20151030191525)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (14.8ms)[0m  [1mCREATE TABLE "categories" ("id" serial primary key, "cat_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191525"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategoriesPerks (20151030191603)
+  [1m[35m (5.8ms)[0m  BEGIN
+  [1m[36m (8.6ms)[0m  [1mCREATE TABLE "categories_perks" ("id" serial primary key, "perk_id" integer, "category_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.7ms)[0m  CREATE  INDEX  "index_categories_perks_on_perk_id" ON "categories_perks"  ("perk_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE  INDEX  "index_categories_perks_on_category_id" ON "categories_perks"  ("category_id")[0m
+  [1m[35m (1.5ms)[0m  ALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_af4e10ca51"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_9fb05bc4ce"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191603"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20151030195125)
+  [1m[35m (5.7ms)[0m  BEGIN
+  [1m[36m (23.2ms)[0m  [1mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (4.1ms)[0m  ALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" timestamp
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (4.3ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" timestamp
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" character varying
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151030195125"]]
+  [1m[35m (1.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'brands'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.1ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories_perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.7ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (21.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (17.5ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20151030190701)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (21.2ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "username" character varying, "address" character varying, "city" character varying, "zipcode" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190701"]]
+  [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerks (20151030190811)
+  [1m[35m (6.4ms)[0m  BEGIN
+  [1m[36m (20.4ms)[0m  [1mCREATE TABLE "perks" ("id" serial primary key, "title" character varying, "discount" character varying, "address" character varying, "zipcode" character varying, "city" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190811"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerksUsers (20151030191143)
+  [1m[35m (12.2ms)[0m  BEGIN
+  [1m[36m (7.7ms)[0m  [1mCREATE TABLE "perks_users" ("id" serial primary key, "user_id" integer, "perk_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.6ms)[0m  CREATE  INDEX  "index_perks_users_on_user_id" ON "perks_users"  ("user_id")
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX  "index_perks_users_on_perk_id" ON "perks_users"  ("perk_id")[0m
+  [1m[35m (2.1ms)[0m  ALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_a2af260ecc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (1.1ms)[0m  [1mALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_76292e19fe"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191143"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBrands (20151030191407)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (19.6ms)[0m  [1mCREATE TABLE "brands" ("id" serial primary key, "brand_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191407"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategories (20151030191525)
+  [1m[35m (6.1ms)[0m  BEGIN
+  [1m[36m (20.3ms)[0m  [1mCREATE TABLE "categories" ("id" serial primary key, "cat_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191525"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategoriesPerks (20151030191603)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (15.1ms)[0m  [1mCREATE TABLE "categories_perks" ("id" serial primary key, "perk_id" integer, "category_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX  "index_categories_perks_on_perk_id" ON "categories_perks"  ("perk_id")
+  [1m[36m (2.2ms)[0m  [1mCREATE  INDEX  "index_categories_perks_on_category_id" ON "categories_perks"  ("category_id")[0m
+  [1m[35m (2.3ms)[0m  ALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_af4e10ca51"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+
+  [1m[36m (1.4ms)[0m  [1mALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_9fb05bc4ce"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191603"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20151030195125)
+  [1m[35m (11.3ms)[0m  BEGIN
+  [1m[36m (15.6ms)[0m  [1mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (4.7ms)[0m  ALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" timestamp
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (4.4ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" timestamp
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" character varying
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151030195125"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (32.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'brands'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (6.3ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (12.0ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories_perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (20.7ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (269.4ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.8ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (11.8ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "perks"[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "brands"
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[35m (0.8ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'laurine_deckow@padbergparisian.co' LIMIT 1[0m
+  [1m[35mUser Exists (8.2ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('jeanie') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36m (20.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (17.4ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20151030190701)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (28.0ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "username" character varying, "address" character varying, "city" character varying, "zipcode" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190701"]]
+  [1m[36m (6.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerks (20151030190811)
+  [1m[35m (6.1ms)[0m  BEGIN
+  [1m[36m (17.9ms)[0m  [1mCREATE TABLE "perks" ("id" serial primary key, "title" character varying, "discount" character varying, "address" character varying, "zipcode" character varying, "city" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190811"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerksUsers (20151030191143)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (10.6ms)[0m  [1mCREATE TABLE "perks_users" ("id" serial primary key, "user_id" integer, "perk_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.4ms)[0m  CREATE  INDEX  "index_perks_users_on_user_id" ON "perks_users"  ("user_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE  INDEX  "index_perks_users_on_perk_id" ON "perks_users"  ("perk_id")[0m
+  [1m[35m (2.7ms)[0m  ALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_a2af260ecc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (1.4ms)[0m  [1mALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_76292e19fe"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191143"]]
+  [1m[36m (6.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBrands (20151030191407)
+  [1m[35m (9.6ms)[0m  BEGIN
+  [1m[36m (15.1ms)[0m  [1mCREATE TABLE "brands" ("id" serial primary key, "brand_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191407"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategories (20151030191525)
+  [1m[35m (5.9ms)[0m  BEGIN
+  [1m[36m (21.6ms)[0m  [1mCREATE TABLE "categories" ("id" serial primary key, "cat_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191525"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategoriesPerks (20151030191603)
+  [1m[35m (5.7ms)[0m  BEGIN
+  [1m[36m (13.6ms)[0m  [1mCREATE TABLE "categories_perks" ("id" serial primary key, "perk_id" integer, "category_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.7ms)[0m  CREATE  INDEX  "index_categories_perks_on_perk_id" ON "categories_perks"  ("perk_id")
+  [1m[36m (1.5ms)[0m  [1mCREATE  INDEX  "index_categories_perks_on_category_id" ON "categories_perks"  ("category_id")[0m
+  [1m[35m (1.9ms)[0m  ALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_af4e10ca51"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_9fb05bc4ce"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191603"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20151030195125)
+  [1m[35m (11.8ms)[0m  BEGIN
+  [1m[36m (15.8ms)[0m  [1mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (6.3ms)[0m  ALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" timestamp
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (3.6ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" timestamp
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" character varying
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.7ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151030195125"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'brands'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.7ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories_perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.7ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.8ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "perks"[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "brands"
+  [1m[36mSQL (0.4ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'lionel_armstrong@leffler.biz' LIMIT 1[0m
+  [1m[35mUser Exists (2.0ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('royce.christiansen') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36m (16.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (6.2ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20151030190701)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (23.1ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "username" character varying, "address" character varying, "city" character varying, "zipcode" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190701"]]
+  [1m[36m (5.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerks (20151030190811)
+  [1m[35m (12.4ms)[0m  BEGIN
+  [1m[36m (21.7ms)[0m  [1mCREATE TABLE "perks" ("id" serial primary key, "title" character varying, "discount" character varying, "address" character varying, "zipcode" character varying, "city" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190811"]]
+  [1m[36m (6.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerksUsers (20151030191143)
+  [1m[35m (11.5ms)[0m  BEGIN
+  [1m[36m (14.0ms)[0m  [1mCREATE TABLE "perks_users" ("id" serial primary key, "user_id" integer, "perk_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (12.2ms)[0m  CREATE  INDEX  "index_perks_users_on_user_id" ON "perks_users"  ("user_id")
+  [1m[36m (6.6ms)[0m  [1mCREATE  INDEX  "index_perks_users_on_perk_id" ON "perks_users"  ("perk_id")[0m
+  [1m[35m (3.3ms)[0m  ALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_a2af260ecc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (2.1ms)[0m  [1mALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_76292e19fe"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191143"]]
+  [1m[36m (5.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBrands (20151030191407)
+  [1m[35m (11.7ms)[0m  BEGIN
+  [1m[36m (28.0ms)[0m  [1mCREATE TABLE "brands" ("id" serial primary key, "brand_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191407"]]
+  [1m[36m (5.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategories (20151030191525)
+  [1m[35m (10.9ms)[0m  BEGIN
+  [1m[36m (23.8ms)[0m  [1mCREATE TABLE "categories" ("id" serial primary key, "cat_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191525"]]
+  [1m[36m (14.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategoriesPerks (20151030191603)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (13.8ms)[0m  [1mCREATE TABLE "categories_perks" ("id" serial primary key, "perk_id" integer, "category_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (12.5ms)[0m  CREATE  INDEX  "index_categories_perks_on_perk_id" ON "categories_perks"  ("perk_id")
+  [1m[36m (12.1ms)[0m  [1mCREATE  INDEX  "index_categories_perks_on_category_id" ON "categories_perks"  ("category_id")[0m
+  [1m[35m (2.0ms)[0m  ALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_af4e10ca51"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+
+  [1m[36m (1.4ms)[0m  [1mALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_9fb05bc4ce"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191603"]]
+  [1m[36m (5.8ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20151030195125)
+  [1m[35m (6.7ms)[0m  BEGIN
+  [1m[36m (31.8ms)[0m  [1mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (28.9ms)[0m  ALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL
+  [1m[36m (2.0ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (2.6ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" timestamp
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (22.1ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" timestamp
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" character varying
+  [1m[36m (12.0ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.6ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151030195125"]]
+  [1m[35m (12.8ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (3.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'brands'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories_perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.5ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "perks"[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "brands"
+  [1m[36mSQL (0.8ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'lottie@crist.org' LIMIT 1[0m
+  [1m[35mUser Exists (2.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('kim') LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.8ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "perks"[0m
+  [1m[35mSQL (0.4ms)[0m  DELETE FROM "brands"
+  [1m[36mSQL (0.4ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jasper.doyle@wuckert.biz' LIMIT 1[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('shaniya_casper') LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.9ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "perks"[0m
+  [1m[35mSQL (0.4ms)[0m  DELETE FROM "brands"
+  [1m[36mSQL (0.4ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (0.4ms)[0m  [1mDELETE FROM "perks"[0m
+  [1m[35mSQL (0.4ms)[0m  DELETE FROM "brands"
+  [1m[36mSQL (0.4ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (25.4ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Auto Power Mount"], ["discount", "33"], ["address", "7911 Hyatt Estate"], ["city", "Lake Jesusburgh"], ["state", "RI"], ["zipcode", "35750-9723"], ["created_at", "2015-10-31 02:02:15.952453"], ["updated_at", "2015-10-31 02:02:15.952453"]]
+  [1m[35m (1.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "GPS Disc Amplifier"], ["discount", "73"], ["address", "7480 Maeve Springs"], ["city", "Port Karolann"], ["state", "MI"], ["zipcode", "10210-7040"], ["created_at", "2015-10-31 02:02:15.987423"], ["updated_at", "2015-10-31 02:02:15.987423"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Disc Bracket"], ["discount", "77"], ["address", "31694 Harris View"], ["city", "Port Maddison"], ["state", "AZ"], ["zipcode", "30301"], ["created_at", "2015-10-31 02:02:15.990663"], ["updated_at", "2015-10-31 02:02:15.990663"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Side Input Compressor"], ["discount", "10"], ["address", "46717 Emil Parkway"], ["city", "Gracielaview"], ["state", "IA"], ["zipcode", "48607"], ["created_at", "2015-10-31 02:02:15.993357"], ["updated_at", "2015-10-31 02:02:15.993357"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Output Component"], ["discount", "60"], ["address", "95136 Alvina Bridge"], ["city", "New Greg"], ["state", "IN"], ["zipcode", "76561"], ["created_at", "2015-10-31 02:02:15.995964"], ["updated_at", "2015-10-31 02:02:15.995964"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Video Power Kit"], ["discount", "56"], ["address", "737 Syble Place"], ["city", "Margarettastad"], ["state", "TX"], ["zipcode", "26669-8574"], ["created_at", "2015-10-31 02:02:15.998612"], ["updated_at", "2015-10-31 02:02:15.998612"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Auto Performance Transmitter"], ["discount", "53"], ["address", "120 Markus Hills"], ["city", "Maryseland"], ["state", "VA"], ["zipcode", "89992"], ["created_at", "2015-10-31 02:02:16.001213"], ["updated_at", "2015-10-31 02:02:16.001213"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Performance Mount"], ["discount", "31"], ["address", "5877 Hahn Forges"], ["city", "Reynoldsshire"], ["state", "HI"], ["zipcode", "80745"], ["created_at", "2015-10-31 02:02:16.003697"], ["updated_at", "2015-10-31 02:02:16.003697"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Electric Portable Compressor"], ["discount", "5"], ["address", "87796 Fatima Manors"], ["city", "Port Leslie"], ["state", "KY"], ["zipcode", "42578-3720"], ["created_at", "2015-10-31 02:02:16.006186"], ["updated_at", "2015-10-31 02:02:16.006186"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Power Remote Filter"], ["discount", "2"], ["address", "44559 Mekhi Motorway"], ["city", "Hellerburgh"], ["state", "TX"], ["zipcode", "38612"], ["created_at", "2015-10-31 02:02:16.008678"], ["updated_at", "2015-10-31 02:02:16.008678"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "EY"], ["created_at", "2015-10-31 02:02:16.016881"], ["updated_at", "2015-10-31 02:02:16.016881"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Finsync"], ["created_at", "2015-10-31 02:02:16.020890"], ["updated_at", "2015-10-31 02:02:16.020890"]]
+  [1m[36m (6.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Breckfunc"], ["created_at", "2015-10-31 02:02:16.029469"], ["updated_at", "2015-10-31 02:02:16.029469"]]
+  [1m[35m (6.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "ZZ"], ["created_at", "2015-10-31 02:02:16.038359"], ["updated_at", "2015-10-31 02:02:16.038359"]]
+  [1m[36m (5.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Pount"], ["created_at", "2015-10-31 02:02:16.046471"], ["updated_at", "2015-10-31 02:02:16.046471"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Sinepod"], ["created_at", "2015-10-31 02:02:16.049691"], ["updated_at", "2015-10-31 02:02:16.049691"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Briore"], ["created_at", "2015-10-31 02:02:16.052185"], ["updated_at", "2015-10-31 02:02:16.052185"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Pieneforge"], ["created_at", "2015-10-31 02:02:16.054598"], ["updated_at", "2015-10-31 02:02:16.054598"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Phoune"], ["created_at", "2015-10-31 02:02:16.057038"], ["updated_at", "2015-10-31 02:02:16.057038"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Phaphforge"], ["created_at", "2015-10-31 02:02:16.059836"], ["updated_at", "2015-10-31 02:02:16.059836"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.6ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (13.9ms)[0m  [1mDELETE FROM "perks"[0m
+  [1m[35mSQL (6.1ms)[0m  DELETE FROM "brands"
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Power Compressor"], ["discount", "73"], ["address", "66559 Nikolaus Glen"], ["city", "New Kingburgh"], ["state", "KS"], ["zipcode", "17271"], ["created_at", "2015-10-31 02:02:42.956529"], ["updated_at", "2015-10-31 02:02:42.956529"]]
+  [1m[35m (6.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (6.0ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Gel Tag Amplifier"], ["discount", "45"], ["address", "607 Bode Bypass"], ["city", "Vonview"], ["state", "SD"], ["zipcode", "57737"], ["created_at", "2015-10-31 02:02:42.971736"], ["updated_at", "2015-10-31 02:02:42.971736"]]
+  [1m[36m (5.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Input Gel Transmitter"], ["discount", "68"], ["address", "0861 Orn Underpass"], ["city", "Blicktown"], ["state", "ID"], ["zipcode", "06183-9524"], ["created_at", "2015-10-31 02:02:42.986503"], ["updated_at", "2015-10-31 02:02:42.986503"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Tag Mount"], ["discount", "67"], ["address", "8738 Jaron Course"], ["city", "East Malachishire"], ["state", "NH"], ["zipcode", "37768"], ["created_at", "2015-10-31 02:02:42.989666"], ["updated_at", "2015-10-31 02:02:42.989666"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Performance Adapter"], ["discount", "44"], ["address", "358 Tyrique Gateway"], ["city", "Dovieview"], ["state", "OK"], ["zipcode", "69617"], ["created_at", "2015-10-31 02:02:42.993241"], ["updated_at", "2015-10-31 02:02:42.993241"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Gel Controller"], ["discount", "27"], ["address", "5707 Bertrand Mill"], ["city", "Torphyland"], ["state", "ND"], ["zipcode", "15341"], ["created_at", "2015-10-31 02:02:42.995943"], ["updated_at", "2015-10-31 02:02:42.995943"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "HD Amplifier"], ["discount", "75"], ["address", "864 Taya Ridge"], ["city", "Earlinehaven"], ["state", "NY"], ["zipcode", "92739"], ["created_at", "2015-10-31 02:02:42.998616"], ["updated_at", "2015-10-31 02:02:42.998616"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "GPS Air Bracket"], ["discount", "73"], ["address", "38409 William Junction"], ["city", "Willamouth"], ["state", "LA"], ["zipcode", "21139"], ["created_at", "2015-10-31 02:02:43.001226"], ["updated_at", "2015-10-31 02:02:43.001226"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Portable HD Transmitter"], ["discount", "14"], ["address", "706 Hyatt Station"], ["city", "East Alekland"], ["state", "PA"], ["zipcode", "75548"], ["created_at", "2015-10-31 02:02:43.003947"], ["updated_at", "2015-10-31 02:02:43.003947"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Air Mount"], ["discount", "58"], ["address", "466 Casper Springs"], ["city", "South Nash"], ["state", "MS"], ["zipcode", "18969"], ["created_at", "2015-10-31 02:02:43.006650"], ["updated_at", "2015-10-31 02:02:43.006650"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Tryck"], ["created_at", "2015-10-31 02:02:43.015087"], ["updated_at", "2015-10-31 02:02:43.015087"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Bruneforge"], ["created_at", "2015-10-31 02:02:43.018194"], ["updated_at", "2015-10-31 02:02:43.018194"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Ambalt"], ["created_at", "2015-10-31 02:02:43.021427"], ["updated_at", "2015-10-31 02:02:43.021427"]]
+  [1m[35m (6.0ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Onebalt"], ["created_at", "2015-10-31 02:02:43.030543"], ["updated_at", "2015-10-31 02:02:43.030543"]]
+  [1m[36m (5.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Triont"], ["created_at", "2015-10-31 02:02:43.039168"], ["updated_at", "2015-10-31 02:02:43.039168"]]
+  [1m[35m (4.6ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Casync"], ["created_at", "2015-10-31 02:02:43.046713"], ["updated_at", "2015-10-31 02:02:43.046713"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Sinepod"], ["created_at", "2015-10-31 02:02:43.049792"], ["updated_at", "2015-10-31 02:02:43.049792"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Traffe"], ["created_at", "2015-10-31 02:02:43.052481"], ["updated_at", "2015-10-31 02:02:43.052481"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Lupod"], ["created_at", "2015-10-31 02:02:43.054997"], ["updated_at", "2015-10-31 02:02:43.054997"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Phans"], ["created_at", "2015-10-31 02:02:43.057216"], ["updated_at", "2015-10-31 02:02:43.057216"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (6.3ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Industrial, Games & Toys"], ["created_at", "2015-10-31 02:02:43.522872"], ["updated_at", "2015-10-31 02:02:43.522872"]]
+  [1m[35m (6.0ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Automotive & Movies"], ["created_at", "2015-10-31 02:02:43.538830"], ["updated_at", "2015-10-31 02:02:43.538830"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Industrial, Garden & Jewelery"], ["created_at", "2015-10-31 02:02:43.542122"], ["updated_at", "2015-10-31 02:02:43.542122"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Tools"], ["created_at", "2015-10-31 02:02:43.544676"], ["updated_at", "2015-10-31 02:02:43.544676"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Toys"], ["created_at", "2015-10-31 02:02:43.546994"], ["updated_at", "2015-10-31 02:02:43.546994"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Toys, Computers & Outdoors"], ["created_at", "2015-10-31 02:02:43.549287"], ["updated_at", "2015-10-31 02:02:43.549287"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Books"], ["created_at", "2015-10-31 02:02:43.551920"], ["updated_at", "2015-10-31 02:02:43.551920"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Health"], ["created_at", "2015-10-31 02:02:43.554125"], ["updated_at", "2015-10-31 02:02:43.554125"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Toys"], ["created_at", "2015-10-31 02:02:43.556493"], ["updated_at", "2015-10-31 02:02:43.556493"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Outdoors"], ["created_at", "2015-10-31 02:02:43.559249"], ["updated_at", "2015-10-31 02:02:43.559249"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.8ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (9.1ms)[0m  [1mDELETE FROM "perks"[0m
+  [1m[35mSQL (6.1ms)[0m  DELETE FROM "brands"
+  [1m[36mSQL (6.8ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'vernie_runte@stoltenberg.biz' LIMIT 1[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('minnie.hoeger') LIMIT 1
+  [1m[36mSQL (11.3ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Sarah White"], ["username", "minnie.hoeger"], ["email", "vernie_runte@stoltenberg.biz"], ["encrypted_password", "$2a$10$NMwdXC3/SIX2wXHuROif3OivJgfYKS4.5f401dC6vBVcy2NGkHEra"], ["address", "469 Bednar Shore"], ["city", "Averymouth"], ["state", "AL"], ["zipcode", "53418"], ["created_at", "2015-10-31 02:03:53.541242"], ["updated_at", "2015-10-31 02:03:53.541242"]]
+  [1m[35m (9.5ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bennie@romaguera.org' LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('theresa.zulauf') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Lorenza Nolan Jr."], ["username", "theresa.zulauf"], ["email", "bennie@romaguera.org"], ["encrypted_password", "$2a$10$7FcVQjLXNKCVehRkZWBI8ORR.1cBy3mrx5o3kRD9.dQShCLDR2tPS"], ["address", "5595 Mylene Rest"], ["city", "West Alta"], ["state", "SC"], ["zipcode", "74104"], ["created_at", "2015-10-31 02:03:53.672859"], ["updated_at", "2015-10-31 02:03:53.672859"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'ashleigh_kub@brown.org' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('olaf_bradtke') LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Demetrius Grant"], ["username", "olaf_bradtke"], ["email", "ashleigh_kub@brown.org"], ["encrypted_password", "$2a$10$WptrF1qMejWBWD5WgB..7eBiDjRJ5c8RUSJbhx23hMfBOuCQkxAbu"], ["address", "30233 Magnus Trafficway"], ["city", "Imeldachester"], ["state", "MA"], ["zipcode", "06583"], ["created_at", "2015-10-31 02:03:53.776938"], ["updated_at", "2015-10-31 02:03:53.776938"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'royce@wunsch.name' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('emma.oconnell') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Shannon Rogahn"], ["username", "emma.oconnell"], ["email", "royce@wunsch.name"], ["encrypted_password", "$2a$10$pZabhV8XmUDt2yGUXtM6g.fbXlK6jq.A5aUon2WwTwCTY/IfPBGM6"], ["address", "55002 Nolan Circle"], ["city", "Lake Ulices"], ["state", "GA"], ["zipcode", "24066-7882"], ["created_at", "2015-10-31 02:03:53.878369"], ["updated_at", "2015-10-31 02:03:53.878369"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'abbey.jones@kotremblay.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('wilfrid') LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Vito Torphy"], ["username", "wilfrid"], ["email", "abbey.jones@kotremblay.com"], ["encrypted_password", "$2a$10$5fVGJXiu7sM/z/.DVC28vuFTzKF40yWsemvnidboaeyopstIv1Hoq"], ["address", "04144 Bauch Pines"], ["city", "East Mozell"], ["state", "TX"], ["zipcode", "29641"], ["created_at", "2015-10-31 02:03:53.990611"], ["updated_at", "2015-10-31 02:03:53.990611"]]
+  [1m[35m (8.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'leila@barrows.info' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('daija') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Jeffrey O'Kon"], ["username", "daija"], ["email", "leila@barrows.info"], ["encrypted_password", "$2a$10$bWOy4mHAxmJeRmJ.C1ZHIuJ.CCnsTcAMDJkXdXJ0HHSiyt8g8LHVq"], ["address", "12399 Roy Cliffs"], ["city", "Emmieside"], ["state", "AZ"], ["zipcode", "10445-3003"], ["created_at", "2015-10-31 02:03:54.105079"], ["updated_at", "2015-10-31 02:03:54.105079"]]
+  [1m[36m (8.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'porter.lindgren@von.org' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('milo.kreiger') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Miss Camille VonRueden"], ["username", "milo.kreiger"], ["email", "porter.lindgren@von.org"], ["encrypted_password", "$2a$10$XBs98Lcs7QvffehCPHITYOv4R8D3VsZygtJ5mUfKf1FAECDKQ8icO"], ["address", "169 Shannon Loaf"], ["city", "Runtemouth"], ["state", "MS"], ["zipcode", "67874-1361"], ["created_at", "2015-10-31 02:03:54.217120"], ["updated_at", "2015-10-31 02:03:54.217120"]]
+  [1m[35m (7.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'audrey@kuhic.co' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('wyatt') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Thora Dibbert"], ["username", "wyatt"], ["email", "audrey@kuhic.co"], ["encrypted_password", "$2a$10$CkZ.tJVoNysJki6yK7ruLeUisXc70q7O9v5B/JcXuXrSJjw6X1oW2"], ["address", "88549 Aiden Parks"], ["city", "Romaguerastad"], ["state", "RI"], ["zipcode", "79554"], ["created_at", "2015-10-31 02:03:54.334964"], ["updated_at", "2015-10-31 02:03:54.334964"]]
+  [1m[36m (7.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jeffry@zemlak.net' LIMIT 1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('hettie.christiansen') LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Raleigh Kreiger DVM"], ["username", "hettie.christiansen"], ["email", "jeffry@zemlak.net"], ["encrypted_password", "$2a$10$wve9S014sXh8BveILQ20L.aBhQmIQbaXnxS0AHlP2hkXQXQ0E9auy"], ["address", "3518 Kuhn Course"], ["city", "Isadoreville"], ["state", "VT"], ["zipcode", "85940"], ["created_at", "2015-10-31 02:03:54.456157"], ["updated_at", "2015-10-31 02:03:54.456157"]]
+  [1m[35m (7.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'filomena_schulist@wisoky.io' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('herminio') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Garfield Bosco"], ["username", "herminio"], ["email", "filomena_schulist@wisoky.io"], ["encrypted_password", "$2a$10$b2pfyDK6k65muGaBtACLw.Adi6Wj/nRqB.4yS9Kp24TWZ7WaegHHS"], ["address", "8776 Nader Stravenue"], ["city", "Bruenburgh"], ["state", "WA"], ["zipcode", "70709-1016"], ["created_at", "2015-10-31 02:03:54.576676"], ["updated_at", "2015-10-31 02:03:54.576676"]]
+  [1m[36m (7.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Side Auto System"], ["discount", "16"], ["address", "502 Violette Ferry"], ["city", "Port Magnoliafort"], ["state", "MT"], ["zipcode", "31696"], ["created_at", "2015-10-31 02:03:54.600757"], ["updated_at", "2015-10-31 02:03:54.600757"]]
+  [1m[35m (5.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Air Tuner"], ["discount", "2"], ["address", "61260 Padberg Track"], ["city", "New Kenyon"], ["state", "TN"], ["zipcode", "59230"], ["created_at", "2015-10-31 02:03:54.610696"], ["updated_at", "2015-10-31 02:03:54.610696"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Portable Audible Transmitter"], ["discount", "2"], ["address", "303 Napoleon Lock"], ["city", "Harrisfurt"], ["state", "KS"], ["zipcode", "46549-1156"], ["created_at", "2015-10-31 02:03:54.614125"], ["updated_at", "2015-10-31 02:03:54.614125"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Gel Portable Receiver"], ["discount", "64"], ["address", "8656 Shad Bypass"], ["city", "Erikaborough"], ["state", "UT"], ["zipcode", "27570-9243"], ["created_at", "2015-10-31 02:03:54.616990"], ["updated_at", "2015-10-31 02:03:54.616990"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Performance Digital Bracket"], ["discount", "42"], ["address", "292 Jacky Loaf"], ["city", "West Willowland"], ["state", "AL"], ["zipcode", "54331-3577"], ["created_at", "2015-10-31 02:03:54.620191"], ["updated_at", "2015-10-31 02:03:54.620191"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Input Electric Compressor"], ["discount", "72"], ["address", "202 Rosalinda Parkways"], ["city", "Kossfurt"], ["state", "OH"], ["zipcode", "61367"], ["created_at", "2015-10-31 02:03:54.623143"], ["updated_at", "2015-10-31 02:03:54.623143"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Output Remote Adapter"], ["discount", "10"], ["address", "508 Salvador Road"], ["city", "South Emmet"], ["state", "OH"], ["zipcode", "80528-5058"], ["created_at", "2015-10-31 02:03:54.625772"], ["updated_at", "2015-10-31 02:03:54.625772"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Audible Performance Tuner"], ["discount", "8"], ["address", "67347 Reynolds Glens"], ["city", "Schulistport"], ["state", "NH"], ["zipcode", "02805-4016"], ["created_at", "2015-10-31 02:03:54.628280"], ["updated_at", "2015-10-31 02:03:54.628280"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Air Receiver"], ["discount", "38"], ["address", "4034 Conn Station"], ["city", "North Russhaven"], ["state", "NC"], ["zipcode", "10825-4958"], ["created_at", "2015-10-31 02:03:54.631366"], ["updated_at", "2015-10-31 02:03:54.631366"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Video Receiver"], ["discount", "8"], ["address", "279 Durgan Expressway"], ["city", "East Patricia"], ["state", "AZ"], ["zipcode", "89923"], ["created_at", "2015-10-31 02:03:54.634159"], ["updated_at", "2015-10-31 02:03:54.634159"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Subnix"], ["created_at", "2015-10-31 02:03:54.644847"], ["updated_at", "2015-10-31 02:03:54.644847"]]
+  [1m[35m (5.8ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Cabalt"], ["created_at", "2015-10-31 02:03:54.654617"], ["updated_at", "2015-10-31 02:03:54.654617"]]
+  [1m[36m (5.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Bronewood"], ["created_at", "2015-10-31 02:03:54.662354"], ["updated_at", "2015-10-31 02:03:54.662354"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Brintfunc"], ["created_at", "2015-10-31 02:03:54.664895"], ["updated_at", "2015-10-31 02:03:54.664895"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Reufunc"], ["created_at", "2015-10-31 02:03:54.667511"], ["updated_at", "2015-10-31 02:03:54.667511"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Pyneforge"], ["created_at", "2015-10-31 02:03:54.669678"], ["updated_at", "2015-10-31 02:03:54.669678"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Socell"], ["created_at", "2015-10-31 02:03:54.671774"], ["updated_at", "2015-10-31 02:03:54.671774"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Lusche"], ["created_at", "2015-10-31 02:03:54.673982"], ["updated_at", "2015-10-31 02:03:54.673982"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Cosche"], ["created_at", "2015-10-31 02:03:54.676134"], ["updated_at", "2015-10-31 02:03:54.676134"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Techsync"], ["created_at", "2015-10-31 02:03:54.678199"], ["updated_at", "2015-10-31 02:03:54.678199"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Baby & Jewelery"], ["created_at", "2015-10-31 02:03:54.685888"], ["updated_at", "2015-10-31 02:03:54.685888"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Games, Grocery & Home"], ["created_at", "2015-10-31 02:03:54.689082"], ["updated_at", "2015-10-31 02:03:54.689082"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Grocery & Movies"], ["created_at", "2015-10-31 02:03:54.691648"], ["updated_at", "2015-10-31 02:03:54.691648"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Industrial"], ["created_at", "2015-10-31 02:03:54.694536"], ["updated_at", "2015-10-31 02:03:54.694536"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Kids, Tools & Music"], ["created_at", "2015-10-31 02:03:54.697004"], ["updated_at", "2015-10-31 02:03:54.697004"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Home"], ["created_at", "2015-10-31 02:03:54.699806"], ["updated_at", "2015-10-31 02:03:54.699806"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Sports & Music"], ["created_at", "2015-10-31 02:03:54.702098"], ["updated_at", "2015-10-31 02:03:54.702098"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Tools"], ["created_at", "2015-10-31 02:03:54.704208"], ["updated_at", "2015-10-31 02:03:54.704208"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Shoes"], ["created_at", "2015-10-31 02:03:54.706366"], ["updated_at", "2015-10-31 02:03:54.706366"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Movies"], ["created_at", "2015-10-31 02:03:54.708445"], ["updated_at", "2015-10-31 02:03:54.708445"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36m (23.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (12.3ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20151030190701)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (16.3ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "username" character varying, "address" character varying, "city" character varying, "zipcode" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190701"]]
+  [1m[36m (5.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerks (20151030190811)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (16.7ms)[0m  [1mCREATE TABLE "perks" ("id" serial primary key, "title" character varying, "discount" character varying, "address" character varying, "zipcode" character varying, "city" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030190811"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePerksUsers (20151030191143)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (8.9ms)[0m  [1mCREATE TABLE "perks_users" ("id" serial primary key, "user_id" integer, "perk_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (8.3ms)[0m  CREATE  INDEX  "index_perks_users_on_user_id" ON "perks_users"  ("user_id")
+  [1m[36m (1.5ms)[0m  [1mCREATE  INDEX  "index_perks_users_on_perk_id" ON "perks_users"  ("perk_id")[0m
+  [1m[35m (2.6ms)[0m  ALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_a2af260ecc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (1.1ms)[0m  [1mALTER TABLE "perks_users" ADD CONSTRAINT "fk_rails_76292e19fe"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191143"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBrands (20151030191407)
+  [1m[35m (6.3ms)[0m  BEGIN
+  [1m[36m (20.0ms)[0m  [1mCREATE TABLE "brands" ("id" serial primary key, "brand_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191407"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategories (20151030191525)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (20.2ms)[0m  [1mCREATE TABLE "categories" ("id" serial primary key, "cat_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191525"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCategoriesPerks (20151030191603)
+  [1m[35m (6.1ms)[0m  BEGIN
+  [1m[36m (8.3ms)[0m  [1mCREATE TABLE "categories_perks" ("id" serial primary key, "perk_id" integer, "category_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.7ms)[0m  CREATE  INDEX  "index_categories_perks_on_perk_id" ON "categories_perks"  ("perk_id")
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX  "index_categories_perks_on_category_id" ON "categories_perks"  ("category_id")[0m
+  [1m[35m (1.3ms)[0m  ALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_af4e10ca51"
+FOREIGN KEY ("perk_id")
+  REFERENCES "perks" ("id")
+
+  [1m[36m (0.9ms)[0m  [1mALTER TABLE "categories_perks" ADD CONSTRAINT "fk_rails_9fb05bc4ce"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20151030191603"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20151030195125)
+  [1m[35m (5.8ms)[0m  BEGIN
+  [1m[36m (21.6ms)[0m  [1mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (6.1ms)[0m  ALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" timestamp
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (3.9ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" timestamp
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" character varying
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.5ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151030195125"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (3.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'brands'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.1ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (3.5ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'categories_perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.1ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'perks_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (1.2ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "perks"[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "brands"
+  [1m[36mSQL (0.4ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'keenan@lehner.name' LIMIT 1[0m
+  [1m[35mUser Exists (5.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('ramiro') LIMIT 1
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Cory Douglas"], ["username", "ramiro"], ["email", "keenan@lehner.name"], ["encrypted_password", "$2a$10$ENImmeBUNJeyLtbBXFjM0OUHt1Md2RvZx3oWzlcvOYtO1E0Wattmq"], ["address", "6874 Corkery Brook"], ["city", "Bashirianland"], ["state", "UT"], ["zipcode", "82724"], ["created_at", "2015-10-31 02:04:15.444567"], ["updated_at", "2015-10-31 02:04:15.444567"]]
+  [1m[35m (6.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'amelia.cronin@fisher.org' LIMIT 1
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('daryl') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Chase Morissette Sr."], ["username", "daryl"], ["email", "amelia.cronin@fisher.org"], ["encrypted_password", "$2a$10$RtWbbpQVVCDZzIgOfeoiGOGtDS69G88MUQQxfhP/etqNkYGuxMFuy"], ["address", "33390 Crooks Locks"], ["city", "Burleyberg"], ["state", "MO"], ["zipcode", "86789"], ["created_at", "2015-10-31 02:04:15.567457"], ["updated_at", "2015-10-31 02:04:15.567457"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'nico.fritsch@cummeratafahey.info' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('eldred_jacobson') LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Ida Rohan"], ["username", "eldred_jacobson"], ["email", "nico.fritsch@cummeratafahey.info"], ["encrypted_password", "$2a$10$l.g3X6LZuFMjKmHRz47sTOk2Af/Nvwe3cUyFy3djxQsQZYrwOiFvO"], ["address", "0290 Taryn Coves"], ["city", "South Genesisbury"], ["state", "OR"], ["zipcode", "24017-2383"], ["created_at", "2015-10-31 02:04:15.678732"], ["updated_at", "2015-10-31 02:04:15.678732"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'pansy@sanford.co' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('casey') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Bart O'Keefe Sr."], ["username", "casey"], ["email", "pansy@sanford.co"], ["encrypted_password", "$2a$10$PfFZNQUXdrtDwkRhrMagxe64T0tMd38rPmQIiC34Oyfygs78sZhke"], ["address", "5183 Candido Curve"], ["city", "Rashawnhaven"], ["state", "NY"], ["zipcode", "83979-4876"], ["created_at", "2015-10-31 02:04:15.790314"], ["updated_at", "2015-10-31 02:04:15.790314"]]
+  [1m[36m (7.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alisha@konader.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('demarcus') LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Patsy Mante"], ["username", "demarcus"], ["email", "alisha@konader.com"], ["encrypted_password", "$2a$10$bKb1swtw.QVffQwr8Ld79ez13oMZGm9tr507nTeGr0zIWYixhzqWS"], ["address", "3056 Kenny Cliffs"], ["city", "Breitenbergmouth"], ["state", "FL"], ["zipcode", "03914"], ["created_at", "2015-10-31 02:04:15.900625"], ["updated_at", "2015-10-31 02:04:15.900625"]]
+  [1m[35m (8.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'lawrence.klocko@schimmelmante.io' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('luella_paucek') LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Monserrat Smitham"], ["username", "luella_paucek"], ["email", "lawrence.klocko@schimmelmante.io"], ["encrypted_password", "$2a$10$Gnl2eEkEBWm3KRXMMM1IrOq/7Qaz7yC6Usmi72j07EJNnEtEnhUvS"], ["address", "873 Emelia Divide"], ["city", "Luzstad"], ["state", "VA"], ["zipcode", "41240"], ["created_at", "2015-10-31 02:04:16.014967"], ["updated_at", "2015-10-31 02:04:16.014967"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'maye_casper@grant.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('salvatore_von') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Hunter Renner"], ["username", "salvatore_von"], ["email", "maye_casper@grant.com"], ["encrypted_password", "$2a$10$aqjGxz2yAlZW9AHVJanq5ejWaQWuEtYnP9GbGak/ogWoLbWbD8/7y"], ["address", "2030 Kihn Forks"], ["city", "Klockoport"], ["state", "NY"], ["zipcode", "76410-9460"], ["created_at", "2015-10-31 02:04:16.119499"], ["updated_at", "2015-10-31 02:04:16.119499"]]
+  [1m[35m (7.6ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'benedict@kunze.co' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('dominique.kub') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Miracle Cruickshank"], ["username", "dominique.kub"], ["email", "benedict@kunze.co"], ["encrypted_password", "$2a$10$iA/NGfkSWAtfriMiXe87TuWqeswCK7ltvLfaTJL1EiMQKWB8I1OZG"], ["address", "3584 Lehner Cliff"], ["city", "Garnethaven"], ["state", "LA"], ["zipcode", "59721-3661"], ["created_at", "2015-10-31 02:04:16.225409"], ["updated_at", "2015-10-31 02:04:16.225409"]]
+  [1m[36m (7.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'zetta_kuhlman@spencermacejkovic.org' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('madge') LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Miss Marie Donnelly"], ["username", "madge"], ["email", "zetta_kuhlman@spencermacejkovic.org"], ["encrypted_password", "$2a$10$lRhye6DMH2utRRcikci1QO9NM/WZJde2u50pbANPQYjvaMQTiVLPG"], ["address", "964 Verla Light"], ["city", "Shannamouth"], ["state", "VA"], ["zipcode", "64343"], ["created_at", "2015-10-31 02:04:16.348620"], ["updated_at", "2015-10-31 02:04:16.348620"]]
+  [1m[35m (7.5ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'roscoe.orn@ferrykonopelski.io' LIMIT 1
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('eldora.greenholt') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "username", "email", "encrypted_password", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Sonny Ryan"], ["username", "eldora.greenholt"], ["email", "roscoe.orn@ferrykonopelski.io"], ["encrypted_password", "$2a$10$eN1lDYJRg/Z16ezMU.qCJ.2hTpNJ1n/n/JwnBVV9XJQ1is0OAEsiq"], ["address", "1787 Schaden Ridges"], ["city", "Larkinton"], ["state", "UT"], ["zipcode", "66362"], ["created_at", "2015-10-31 02:04:16.464894"], ["updated_at", "2015-10-31 02:04:16.464894"]]
+  [1m[36m (7.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Video Performance Receiver"], ["discount", "21"], ["address", "2247 Haley Turnpike"], ["city", "New Lilyview"], ["state", "CO"], ["zipcode", "77650-9558"], ["created_at", "2015-10-31 02:04:16.485323"], ["updated_at", "2015-10-31 02:04:16.485323"]]
+  [1m[35m (6.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Performance Case"], ["discount", "53"], ["address", "082 Russel Flats"], ["city", "Lake Hertha"], ["state", "IA"], ["zipcode", "59027-4925"], ["created_at", "2015-10-31 02:04:16.495201"], ["updated_at", "2015-10-31 02:04:16.495201"]]
+  [1m[36m (5.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Side Filter"], ["discount", "42"], ["address", "1905 Jesse Track"], ["city", "Oletaside"], ["state", "IA"], ["zipcode", "59515-8513"], ["created_at", "2015-10-31 02:04:16.503260"], ["updated_at", "2015-10-31 02:04:16.503260"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Output Viewer"], ["discount", "9"], ["address", "494 Sigrid Roads"], ["city", "Lake Elenafort"], ["state", "IA"], ["zipcode", "17324-3599"], ["created_at", "2015-10-31 02:04:16.505981"], ["updated_at", "2015-10-31 02:04:16.505981"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Disc Bridge"], ["discount", "24"], ["address", "9449 Schultz Spurs"], ["city", "Ameliehaven"], ["state", "NE"], ["zipcode", "89355"], ["created_at", "2015-10-31 02:04:16.508657"], ["updated_at", "2015-10-31 02:04:16.508657"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Tag Component"], ["discount", "21"], ["address", "9560 Kassandra Land"], ["city", "Jonesburgh"], ["state", "CO"], ["zipcode", "63224-5888"], ["created_at", "2015-10-31 02:04:16.511326"], ["updated_at", "2015-10-31 02:04:16.511326"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Output Bridge"], ["discount", "5"], ["address", "73158 Fritsch Shoal"], ["city", "South Carlee"], ["state", "MN"], ["zipcode", "52137-6880"], ["created_at", "2015-10-31 02:04:16.513884"], ["updated_at", "2015-10-31 02:04:16.513884"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Digital Component"], ["discount", "3"], ["address", "66602 Collins Meadows"], ["city", "Merleton"], ["state", "NE"], ["zipcode", "13141"], ["created_at", "2015-10-31 02:04:16.516678"], ["updated_at", "2015-10-31 02:04:16.516678"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Performance Kit"], ["discount", "74"], ["address", "54249 Borer Coves"], ["city", "Hagenesview"], ["state", "UT"], ["zipcode", "54187-4085"], ["created_at", "2015-10-31 02:04:16.519209"], ["updated_at", "2015-10-31 02:04:16.519209"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "perks" ("title", "discount", "address", "city", "state", "zipcode", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["title", "Side Receiver"], ["discount", "63"], ["address", "820 Jocelyn Lake"], ["city", "New Daynamouth"], ["state", "MO"], ["zipcode", "02021"], ["created_at", "2015-10-31 02:04:16.521705"], ["updated_at", "2015-10-31 02:04:16.521705"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Phint"], ["created_at", "2015-10-31 02:04:16.528985"], ["updated_at", "2015-10-31 02:04:16.528985"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Subsche"], ["created_at", "2015-10-31 02:04:16.532867"], ["updated_at", "2015-10-31 02:04:16.532867"]]
+  [1m[36m (5.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Bryne"], ["created_at", "2015-10-31 02:04:16.541059"], ["updated_at", "2015-10-31 02:04:16.541059"]]
+  [1m[35m (5.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Trioreforge"], ["created_at", "2015-10-31 02:04:16.549013"], ["updated_at", "2015-10-31 02:04:16.549013"]]
+  [1m[36m (6.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Aquapod"], ["created_at", "2015-10-31 02:04:16.557950"], ["updated_at", "2015-10-31 02:04:16.557950"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "CVE"], ["created_at", "2015-10-31 02:04:16.560530"], ["updated_at", "2015-10-31 02:04:16.560530"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Cobalt"], ["created_at", "2015-10-31 02:04:16.563005"], ["updated_at", "2015-10-31 02:04:16.563005"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Phiophfunc"], ["created_at", "2015-10-31 02:04:16.565336"], ["updated_at", "2015-10-31 02:04:16.565336"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["brand_name", "Bryckwood"], ["created_at", "2015-10-31 02:04:16.567884"], ["updated_at", "2015-10-31 02:04:16.567884"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "brands" ("brand_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["brand_name", "Brouphfunc"], ["created_at", "2015-10-31 02:04:16.570111"], ["updated_at", "2015-10-31 02:04:16.570111"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Garden, Electronics & Shoes"], ["created_at", "2015-10-31 02:04:16.578060"], ["updated_at", "2015-10-31 02:04:16.578060"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Electronics, Books & Baby"], ["created_at", "2015-10-31 02:04:16.581472"], ["updated_at", "2015-10-31 02:04:16.581472"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Industrial, Computers & Electronics"], ["created_at", "2015-10-31 02:04:16.583795"], ["updated_at", "2015-10-31 02:04:16.583795"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Health"], ["created_at", "2015-10-31 02:04:16.586328"], ["updated_at", "2015-10-31 02:04:16.586328"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Garden"], ["created_at", "2015-10-31 02:04:16.589417"], ["updated_at", "2015-10-31 02:04:16.589417"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Shoes"], ["created_at", "2015-10-31 02:04:16.591599"], ["updated_at", "2015-10-31 02:04:16.591599"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Movies & Toys"], ["created_at", "2015-10-31 02:04:16.593869"], ["updated_at", "2015-10-31 02:04:16.593869"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Tools & Toys"], ["created_at", "2015-10-31 02:04:16.596273"], ["updated_at", "2015-10-31 02:04:16.596273"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["cat_name", "Baby, Music & Toys"], ["created_at", "2015-10-31 02:04:16.598586"], ["updated_at", "2015-10-31 02:04:16.598586"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("cat_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["cat_name", "Movies & Industrial"], ["created_at", "2015-10-31 02:04:16.601275"], ["updated_at", "2015-10-31 02:04:16.601275"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m

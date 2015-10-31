@@ -1,0 +1,17 @@
+<%= form_for(@categories_perk) do |f| %>
+  <% if @categories_perk.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@categories_perk.errors.count, "error") %> prohibited this categories_perk from being saved:</h2>
+
+      <ul>
+      <% @categories_perk.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

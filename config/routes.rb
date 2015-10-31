@@ -8,6 +8,25 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
+
+  concern :perkcategories do
+    resources :categories_perks
+  end
+
+  concern :userperks do
+    resources :perks_users
+  end
+
+  resources :perks, concerns: [:perkcategories, :userperks]
+
+
+  resources :users, concerns: :userperks
+
+  resources :brands do
+    resource :perks
+  end
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
