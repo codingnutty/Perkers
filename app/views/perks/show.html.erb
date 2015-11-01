@@ -1,4 +1,29 @@
-<p id="notice"><%= notice %></p>
+<% if @brand != nil || @perk != nil %>
+  Perk title: <%= @perk.title %><br>
+  Discount: <%= @perk.discount %> %<br>
+  Location:<br>
+  <%= @perk.city %><br>
+  <%= @perk.state %><br>
+  <%= @brand.brand_name %>
+<% else %>
+  Sorry No Perks Here! Try again some other time.
+<% end %>
 
-<%= link_to 'Edit', edit_perk_path(@perk) %> |
-<%= link_to 'Back', perks_path %>
+
+ <div class='text-center'>
+  <div class='panel' style='border: none;'>
+    <% if @errors %>
+      <h3><%= @errors %></h3>
+    <% end %>
+  </div>
+<div class='panel panel-primary perk single' id='perk<%=@perk.id%>'>
+
+  <div class='panel-footer'>
+    <%= render partial: '/favourites/favourite_buttons', locals: {perk: @perk} %>
+  </div>
+
+
+<% if current_user %>
+  <%= link_to 'Edit', edit_perk_path(@perk) %> |
+  <%= link_to 'Back', perks_path %>
+<% end %>

@@ -1,0 +1,2 @@
+'[<% @perks.each do |perk| %>"<tr><td><%= perk.title %></td><td><%= perk.discount %> % </td><td><div class='text-center'><div class='panel' style='border: none;'><% if @errors %><h3><%= @errors %></h3><% end %></div>
+<div class='panel-footer'><%= render partial: '/favourites/favourite_buttons', locals: {perk: perk} %></div></div></td></tr>",<% end %>]'

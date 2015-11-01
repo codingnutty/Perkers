@@ -1,30 +1,49 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  get 'categories/index'
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  root 'categories#index'
 
-
-  concern :perkcategories do
-    resources :categories_perks
-  end
-
-  concern :userperks do
-    resources :perks_users
-  end
-
-  resources :perks, concerns: [:perkcategories, :userperks]
-
-
-  resources :users, concerns: :userperks
-
+  resources :perk_categories
+  resources :perks
+  # do
+    # member do
+    #   post :favourite
+    #   post :unfavourite
+    # end
+  # end
   resources :brands do
-    resource :perks
+    scope module: "brand_scope" do
+        resources :perks
+    end
   end
+  resources :categories
+  resources :users
+  resources :favourites
+
+
+# ***************************************
+
+  # concern :perkcategories do
+  #   resources :categories_perks
+  # end
+
+  # concern :userperks do
+  #   resources :perks_users
+  # end
+
+  # resources :perks, concerns: [:perkcategories, :userperks]
+
+
+  # resources :users, concerns: :userperks
+
+  # resources :brands
+
+# *********************************************
 
 
   # Example of regular route:

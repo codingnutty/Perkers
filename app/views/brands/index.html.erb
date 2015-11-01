@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Listing Brands</h1>
 
@@ -12,7 +12,8 @@
   <tbody>
     <% @brands.each do |brand| %>
       <tr>
-        <td><%= link_to 'Show', brand %></td>
+        <td><a href="/brands/<%=brand.id %>"><%= brand.brand_name %></a>
+        </td>
         <td><%= link_to 'Edit', edit_brand_path(brand) %></td>
         <td><%= link_to 'Destroy', brand, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

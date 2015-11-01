@@ -5,11 +5,16 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
+    @perks = Perk.all
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @category = Category.find(params[:id])
+    @perk_category = PerkCategory.find_by(:category_id => params[:id])
+    @perk = Perk.find_by(:id =>@perk_category.perk.id)
+    @brand = Brand.find_by(:id => @perk.brand_id)
   end
 
   # GET /categories/new

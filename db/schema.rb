@@ -28,15 +28,26 @@ ActiveRecord::Schema.define(version: 20151030195125) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories_perks", force: :cascade do |t|
+  create_table "favourites", force: :cascade do |t|
+    t.integer  "count",      default: 0
+    t.integer  "user_id"
+    t.integer  "perk_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "favourites", ["perk_id"], name: "index_favourites_on_perk_id", using: :btree
+  add_index "favourites", ["user_id"], name: "index_favourites_on_user_id", using: :btree
+
+  create_table "perk_categories", force: :cascade do |t|
     t.integer  "perk_id"
     t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "categories_perks", ["category_id"], name: "index_categories_perks_on_category_id", using: :btree
-  add_index "categories_perks", ["perk_id"], name: "index_categories_perks_on_perk_id", using: :btree
+  add_index "perk_categories", ["category_id"], name: "index_perk_categories_on_category_id", using: :btree
+  add_index "perk_categories", ["perk_id"], name: "index_perk_categories_on_perk_id", using: :btree
 
   create_table "perks", force: :cascade do |t|
     t.string   "title"
@@ -45,19 +56,12 @@ ActiveRecord::Schema.define(version: 20151030195125) do
     t.string   "zipcode"
     t.string   "city"
     t.string   "state"
+    t.integer  "brand_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "perks_users", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "perk_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "perks_users", ["perk_id"], name: "index_perks_users_on_perk_id", using: :btree
-  add_index "perks_users", ["user_id"], name: "index_perks_users_on_user_id", using: :btree
+  add_index "perks", ["brand_id"], name: "index_perks_on_brand_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -83,8 +87,8 @@ ActiveRecord::Schema.define(version: 20151030195125) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "categories_perks", "categories"
-  add_foreign_key "categories_perks", "perks"
-  add_foreign_key "perks_users", "perks"
-  add_foreign_key "perks_users", "users"
+  add_foreign_key "favourites", "perks"
+  add_foreign_key "favourites", "users"
+  add_foreign_key "perk_categories", "categories"
+  add_foreign_key "perk_categories", "perks"
 end

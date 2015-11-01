@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Perk Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @perk_categories.each do |perk_category| %>
+      <tr>
+        <td><%= perk_category.category.cat_name %></td>
+        <td><%= link_to 'Show', perk_category %></td>
+        <td><%= link_to 'Edit', edit_perk_category_path(perk_category) %></td>
+        <td><%= link_to 'Destroy', perk_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Perk category', new_perk_category_path %>

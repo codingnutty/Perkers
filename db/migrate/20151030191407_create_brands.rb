@@ -3,6 +3,7 @@ class CreateBrands < ActiveRecord::Migration
     create_table :brands do |t|
       t.string :brand_name
 
+
       t.timestamps null: false
     end
   end

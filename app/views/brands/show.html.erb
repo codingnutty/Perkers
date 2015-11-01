@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+Brand : <%=  @brand.brand_name %><br>
+
+<% if @perk != nil %>
+  Perk : <%= @perk.title %><br>
+  Discount : <%= @perk.discount %><br>
+<% else %>
+  Sorry No Perks Here! Try again some other time.
+<% end %>
 
 <%= link_to 'Edit', edit_brand_path(@brand) %> |
 <%= link_to 'Back', brands_path %>

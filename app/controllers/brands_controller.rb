@@ -10,6 +10,8 @@ class BrandsController < ApplicationController
   # GET /brands/1
   # GET /brands/1.json
   def show
+    @brand = Brand.find(params[:id])
+    @perk = Perk.find_by(:brand_id => @brand.id)
   end
 
   # GET /brands/new

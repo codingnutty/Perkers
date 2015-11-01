@@ -1,0 +1,2 @@
+module PerkCategoriesHelper
+end

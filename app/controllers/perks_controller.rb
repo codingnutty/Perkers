@@ -5,11 +5,21 @@ class PerksController < ApplicationController
   # GET /perks.json
   def index
     @perks = Perk.all
-  end
+    @user = current_user
 
+    # if request.xhr?
+    #   @perks = Perk.all.order(created_at: :desc)
+    #   render '_allperks.json', layout: false
+    # else
+    #   render 'index'
+    # end
+  end
   # GET /perks/1
   # GET /perks/1.json
   def show
+    @perk = Perk.find(params[:id])
+    @favourites = Favourite.find_by(:perk_id => params[:id])
+    @brand = Brand.find_by(:id => @perk.brand_id)
   end
 
   # GET /perks/new
@@ -24,7 +34,9 @@ class PerksController < ApplicationController
   # POST /perks
   # POST /perks.json
   def create
-    @perk = Perk.new(perk_params)
+    @brands = Brand.all
+    @perk = Perk.create(perk_params)
+
 
     respond_to do |format|
       if @perk.save
@@ -40,6 +52,7 @@ class PerksController < ApplicationController
   # PATCH/PUT /perks/1
   # PATCH/PUT /perks/1.json
   def update
+
     respond_to do |format|
       if @perk.update(perk_params)
         format.html { redirect_to @perk, notice: 'Perk was successfully updated.' }
@@ -61,6 +74,21 @@ class PerksController < ApplicationController
     end
   end
 
+  def favourite
+   @perk = Perk.find_by(id: params[:id])
+   vote = @perk.favourites.create(count:1)
+   redirect_to @perk
+  end
+
+  def unfavourite
+    @perk = Perk.find_by(id: params[:id])
+    vote = @perk.favourites.last
+    vote.destroy
+    redirect_to @perk
+ end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_perk
@@ -69,6 +97,8 @@ class PerksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def perk_params
-      params[:perk]
+       params.require(:perk).permit(:title, :discount, :address, :city, :state, :zipcode, :user_id, :time_start, :time_end, :brand_id)
     end
+
+
 end
