@@ -1,26 +1,19 @@
-
-
 <h1>Listing Categories</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @categories.each do |category| %>
-      <tr>
-        <td><a href="/categories/<%=category.id %>"><%= category.cat_name %></a>
-        </td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="panel panel-primary contain" id="category<%=category.id %>"
+        <div class="panel-body">
+          <a href="/categories/<%=category.id %>"><%= category.cat_name %></a>
+
+        <div class = "panel-footer">
+          <% if is_admin? %>
+            <%= link_to 'Edit', edit_category_path(category) %>
+            <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
 <br>
-
-<%= link_to 'New Category', new_category_path %>
+<% if is_admin? %>
+  <%= link_to 'New Category', new_category_path %>
+<% end %>

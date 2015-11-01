@@ -1,17 +1,22 @@
-<%= form_for(@brand) do |f| %>
-  <% if @brand.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@brand.errors.count, "error") %> prohibited this brand from being saved:</h2>
 
-      <ul>
-      <% @brand.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<% if user_signed_in? %>
+  <%= form_for(@brand) do |f| %>
+    <% if @brand.errors.any? %>
+      <div id="error_explanation">
+       <h2><%= pluralize(@brand.errors.count, "error") %> prohibited this brand from being saved:</h2>
+
+        <ul>
+        <% @brand.errors.full_messages.each do |message| %>
+         <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="actions">
+       <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<% else %>
+    You are not admin. You do not have adding or updating permission
 <% end %>

@@ -1,6 +1,10 @@
-<h1>Editing Brand</h1>
+<% if is_admin? %>
+  <h1>Editing Brand</h1>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to 'Show', @brand %> |
-<%= link_to 'Back', brands_path %>
+<% else %>
+    You are not admin. You do not have adding or updating permission
+<% end %>
+  <%= link_to 'Show', @brand %> |
+  <%= link_to 'Back', brands_path %>

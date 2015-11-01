@@ -73,6 +73,7 @@ html {
 
 body {
     margin: 0;
+
 }
 
 /* ==========================================================================
@@ -395,14 +396,3 @@ table {
     border-spacing: 0;
 }
 
-.perks-list {
-    list-style-type: none;
-    margin-left:20px;
-    margin-top:20px;
-    padding:20px;
-    width: 10em;
-    height:10em;
-    float: left;
-    display: inline-block;
-    border: 1px solid black;
-  }

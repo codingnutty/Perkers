@@ -22,8 +22,7 @@
     <%= render partial: '/favourites/favourite_buttons', locals: {perk: @perk} %>
   </div>
 
-
-<% if current_user %>
+<% if is_admin? %>
   <%= link_to 'Edit', edit_perk_path(@perk) %> |
-  <%= link_to 'Back', perks_path %>
 <% end %>
+  <%= link_to 'Back', perks_path %>

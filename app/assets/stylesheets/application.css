@@ -12,5 +12,154 @@
  *
  *= require_tree .
  *= require_self
- *= require_perk.css
+ *= require normalize
+ *= require perks
  */
+.border-form-div {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.border-form-div .form-signin-heading,
+.border-form-div .checkbox {
+  margin-bottom: 10px;
+}
+.border-form-div input[type="text"],
+.border-form-div input[type="email"],
+.border-form-div input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}
+.navbar {
+background-color:black;
+opacity: 0.8;
+height:50px;
+}
+
+.comments_body{
+  color:black;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.footer-panel {
+  color:black;
+}
+
+.attendees {
+  position:relative;
+  margin-right:0px;
+  margin-left:20px;
+  border:1px solid white;
+}
+
+.add-comment{
+  color:black;
+}
+
+.people-attended {
+  display:inline-block;
+}
+
+.rating_number {
+postion:relative;
+margin-top: -10px;
+}
+
+.host-attendees{
+  display:inline-block;
+}
+
+.nav-input {
+  display: inline-block;
+  margin: 8px 4px;
+}
+
+div.navbar-header {
+  position: absolute;
+  margin-left: 50%;
+  margin-right: 50%;
+}
+.navbar-brand {
+  font-weight: bolder;
+  font-size: 1.75em;
+}
+
+a {
+  color: #333;
+}
+
+a.grav {
+  padding: 10px !important;
+}
+
+#new_user input {
+  width: 100%;
+}
+
+.border-form-div .btn, .sidebar-module .btn {
+  margin-bottom: 10px;
+  width: 100%;
+  color: white;
+}
+.border-form-div .btn-facebook:hover {
+  color: #ccc;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  font-size: 1.25em;
+}
+
+div.main {
+  text-align: center;
+  margin-top: 1em;
+}
+
+.comments-section {
+  width: 80%;
+}
+
+.navbar-brand {
+  color:#E53935;
+  font-size: 25px;
+
+}
+
+#brand-name {
+
+  font-size: 40px;
+  color: #D4E157;
+}
+
+.navigation-contents{
+  font-size: 19px;
+}
+
+#user {
+  color:#777;
+}
+
+.btn-lg{
+  color: red;
+}
+
+.near-you{
+  border: 1px solid black ;
+  height:500px;
+}
+
+.contain{
+  width:50em;
+  margin-left:25%;
+  margin-right:25%;
+}

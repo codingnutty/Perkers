@@ -1,50 +1,66 @@
-<%= link_to 'Add Perk', new_perk_path %>
-
+<article class="all-perks">
 <h1>Listing Perks near you</h1>
-
     <% @perks.each do |perk| %>
         <% if @user.zipcode == perk.zipcode %>
-        <ul>
-            <li class="perks-list">
-              <a href="/perks/<%= perk.id%>"><%= perk.title %></a>
-              <%= perk.discount %> % </td>
-              <div class='panel' style='border: none;'>
-              <% if @errors %>
-              <h3><%= @errors %></h3>
-              <% end %>
+
+          <div  class="perks-list">
+            <div class="panel panel-primary" id="loc-perk<%=perk.id %>"
+              <div class='panel-body'>
+                <a href="/perks/<%= perk.id%>">
+                  <%= perk.title %>
+                </a>
               </div>
-              <div class='panel-footer'>
-              <%= render partial: '/favourites/favourite_buttons', locals: {perk: perk} %>
-              </div>
-              <%= link_to 'Edit', edit_perk_path(perk) %>
-               <%= link_to 'Destroy', perk, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </li>
-        <ul>
+
+                  <%= perk.discount %> %
+                  <div class='panel' style='border: none;'>
+                    <% if @errors %>
+                    <h3><%= @errors %></h3>
+                    <% end %>
+                  </div>
+                 <div class='panel-footer'>
+                    <%= render partial: '/favourites/favourite_buttons', locals: {perk: perk} %>
+                     <% if is_admin? %>
+                        <%= link_to 'Edit', edit_perk_path(perk) %>
+                        <%= link_to 'Destroy', perk, method: :delete, data: { confirm: 'Are you sure?' } %>
+                     <% end %>
+                 </div>
+             </div>
+          </div>
         <% end %>
     <% end %>
+ <h1>Listing all Perks</h1>
 
-<h1>Listing all Perks</h1>
     <% @perks.each do |perk| %>
         <% if @user.zipcode != perk.zipcode %>
-          <ul>
-            <li class="perks-list">
-              <a href="/perks/<%= perk.id%>"><%= perk.title %></a>
-              <%= perk.discount %> % </td>
-              <div class='panel' style='border: none;'>
-              <% if @errors %>
-              <h3><%= @errors %></h3>
-              <% end %>
+            <div class="perks-list">
+              <div class="panel panel-primary" id="all-perk<%=perk.id%>"
+                <div class='panel-body'>
+                  <a href="/perks/<%= perk.id%>">
+                    <%= perk.title %>
+                  </a>
+                </div>
+                    <%= perk.discount %> % </td>
+                    <div class='panel' style='border: none;'>
+                      <% if @errors %>
+                        <h3><%= @errors %></h3>
+                      <% end %>
+                    </div>
+                <div class='panel-footer'>
+                    <%= render partial: '/favourites/favourite_buttons', locals: {perk: perk} %>
+                    <% if is_admin? %>
+                        <%= link_to 'Edit', edit_perk_path(perk) %>
+                        <%= link_to 'Destroy', perk, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <% end %>
+                </div>
               </div>
-              <div class='panel-footer'>
-              <%= render partial: '/favourites/favourite_buttons', locals: {perk: perk} %>
-              </div>
-              <%= link_to 'Edit', edit_perk_path(perk) %>
-               <%= link_to 'Destroy', perk, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </li>
-          <ul>
+            </div>
         <% end %>
     <% end %>
-
-
-
-
+<% if is_admin? %>
+  <br>
+  <br>
+  <button class ="btn-lg">
+    <%= link_to 'Add Perk', new_perk_path(@perks) %>
+  </button>
+<% end %>
+</article>
