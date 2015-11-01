@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20151030195125) do
   end
 
   create_table "favourites", force: :cascade do |t|
-    t.integer  "count",      default: 0
+    t.integer  "value",      default: 0
     t.integer  "user_id"
     t.integer  "perk_id"
     t.datetime "created_at",             null: false
@@ -87,8 +87,6 @@ ActiveRecord::Schema.define(version: 20151030195125) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "favourites", "perks"
-  add_foreign_key "favourites", "users"
   add_foreign_key "perk_categories", "categories"
   add_foreign_key "perk_categories", "perks"
 end

@@ -59,6 +59,5 @@ user_favourite_perks = 10.times do
   random_perk = rand(1..Perk.count)
   Favourite.create!(
     :user_id => random_user,
-    :perk_id => random_perk,
-    :count => 1)
+    :perk_id => random_perk)
 end

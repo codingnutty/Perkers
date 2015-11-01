@@ -18,7 +18,10 @@
                     <% end %>
                   </div>
                  <div class='panel-footer'>
-                    <%= render partial: '/favourites/favourite_buttons', locals: {perk: perk} %>
+                     <% if current_user %>
+                      <%= render partial: '/favourites/favourite_button', locals: {perk: perk} %>
+                      <%= render partial: '/favourites/unfavourite_button', locals: {perk: perk } %>
+                     <% end %>
                      <% if is_admin? %>
                         <%= link_to 'Edit', edit_perk_path(perk) %>
                         <%= link_to 'Destroy', perk, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -26,10 +29,9 @@
                  </div>
              </div>
           </div>
-        <% end %>
+          <% end %>
     <% end %>
  <h1>Listing all Perks</h1>
-
     <% @perks.each do |perk| %>
         <% if @user.zipcode != perk.zipcode %>
             <div class="perks-list">
@@ -46,7 +48,12 @@
                       <% end %>
                     </div>
                 <div class='panel-footer'>
-                    <%= render partial: '/favourites/favourite_buttons', locals: {perk: perk} %>
+                     <% if current_user %>
+                      <%= render partial: '/favourites/favourite_button', locals: {perk: perk} %>
+                      <%= render partial: '/favourites/unfavourite_button', locals: {perk: perk}%>
+
+                     <% end %>
+
                     <% if is_admin? %>
                         <%= link_to 'Edit', edit_perk_path(perk) %>
                         <%= link_to 'Destroy', perk, method: :delete, data: { confirm: 'Are you sure?' } %>

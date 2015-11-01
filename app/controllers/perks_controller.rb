@@ -6,6 +6,7 @@ class PerksController < ApplicationController
   def index
     @perks = Perk.all
     @user = current_user
+    @user_perks = @user.perks.all
 
     # if request.xhr?
     #   @perks = Perk.all.order(created_at: :desc)
@@ -18,8 +19,8 @@ class PerksController < ApplicationController
   # GET /perks/1.json
   def show
     @perk = Perk.find(params[:id])
-    @favourites = Favourite.find_by(:perk_id => params[:id])
     @brand = Brand.find_by(:id => @perk.brand_id)
+    @favourites = Favourite.find_by(:perk_id => params[:id])
   end
 
   # GET /perks/new
@@ -35,9 +36,9 @@ class PerksController < ApplicationController
   # POST /perks.json
   def create
     @brands = Brand.all
-    @perk = Perk.create(perk_params)
-
-
+    @user = current_user
+    @perk = @user.perks.new(perk_params)
+    @favourites = @perk.favourites.all.order(created_at: :desc)
     respond_to do |format|
       if @perk.save
         format.html { redirect_to @perk, notice: 'Perk was successfully created.' }
@@ -73,20 +74,6 @@ class PerksController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  def favourite
-   @perk = Perk.find_by(id: params[:id])
-   vote = @perk.favourites.create(count:1)
-   redirect_to @perk
-  end
-
-  def unfavourite
-    @perk = Perk.find_by(id: params[:id])
-    vote = @perk.favourites.last
-    vote.destroy
-    redirect_to @perk
- end
-
 
 
   private

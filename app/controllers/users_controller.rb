@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user.find(params[:id])
+    @user = User.find(params[:id])
+    start = 0
+    stop = 19
+    @perks = @user.perks.order(created_at: :desc)[start..stop]
+    @favourites = Favourite.find_by(:user_id => params[:id])
   end
 
   # GET /users/new

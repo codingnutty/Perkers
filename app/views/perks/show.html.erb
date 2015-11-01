@@ -18,9 +18,7 @@
   </div>
 <div class='panel panel-primary perk single' id='perk<%=@perk.id%>'>
 
-  <div class='panel-footer'>
-    <%= render partial: '/favourites/favourite_buttons', locals: {perk: @perk} %>
-  </div>
+<!--  -->
 
 <% if is_admin? %>
   <%= link_to 'Edit', edit_perk_path(@perk) %> |

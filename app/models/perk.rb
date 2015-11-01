@@ -11,6 +11,16 @@ class Perk < ActiveRecord::Base
     self.favourites.count
   end
 
+  def favourite?(perk)
+    Favourite.find_by(:favourite_id => perk.id)
+  end
 
+  def favourite!(perk)
+    Favourite.create!(:favouirte_id => perk.id)
+  end
+
+  def favourite!(perk)
+    Favourite.find_by(:favourite_id => perk.id).destroy
+  end
 
 end

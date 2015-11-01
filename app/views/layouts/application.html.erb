@@ -10,40 +10,19 @@
   <link href='https://fonts.googleapis.com/css?family=Righteous|Gochi+Hand' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-      <a id = "brand-name" class="navbar-brand" href="/perks">Perker</a>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href='/categories'><span  class = "navigation-contents"> Categories</span></a></li>
-        <li><a href="/brands"><span  class = "navigation-contents">Brands</span></a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
-            <span id ="user">Logged in as <%= current_user.username %></span>
-             <li> <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
-              <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
-          <% else %>
-             <li> <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
-             <li> <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
-          <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
+  <%= render "layouts/header" %>
+  <div>
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
+  </div>
+
 
     <%= yield %>
 
+  <%= render "layouts/footer" %>
 </body>
 </html>

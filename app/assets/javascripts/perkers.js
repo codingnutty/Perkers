@@ -1,10 +1,10 @@
 // scrolable = true
 
 $(document).ready(function(){
-  favourite();
+  unfavourite();
 });
 
-function favourite() {
+function unfavourite() {
   $('body').on("submit", ".heart-buttons #heart", function(event){
     event.preventDefault();
 
