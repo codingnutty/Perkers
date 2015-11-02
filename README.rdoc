@@ -33,6 +33,6 @@ You are all ready to go. You will be able to view this project on localhost:3000
 
 Pending tasks for this project:
 
-* Still working on Ajax. Working on Debugging itit.
+* Still working on Ajax. Working on Debugging it.
 
 * Partial tests written. More coming up.
