@@ -31,6 +31,8 @@ You are all ready to go. You will be able to view this project on localhost:3000
 
 * ...
 
+Pending tasks for this project:
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Still working on. Unable to receive response. Hence, trying to debug it.
+
+Partial tests written. More coming up.

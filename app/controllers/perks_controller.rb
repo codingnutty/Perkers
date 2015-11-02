@@ -19,6 +19,12 @@ class PerksController < ApplicationController
     @perk = Perk.find(params[:id])
     @brand = Brand.find_by(:id => @perk.brand_id)
     @favourites = Favourite.find_by(:perk_id => params[:id])
+    # if request.xhr?
+    #   p "I am in xhr"
+    #   render partial: 'show', layout: false
+    # else
+    #   redirect_to '/perks'
+    # end
   end
 
   # GET /perks/new

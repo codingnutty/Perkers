@@ -1,4 +1,4 @@
-<article class="all-perks">
+ <article class="all-perks">
 <h1>WE FOUND PERKS AROUND YOU!! </h1>
 <% if near_me.empty? %>
   <h4>Sorry! There are no perks available near you. Below are all perks you can avail.</h4>
@@ -6,9 +6,8 @@
 
     <% near_me[0..5].each do |perk| %>
           <div  class="perks-list">
-            <div class="panel panel-primary" id="loc-perk<%=perk.id %>"
               <div class='panel-body'>
-                <a href="/perks/<%= perk.id%>">
+                <a class="each-perk" id="<%= perk.id%>" href="/perks/<%= perk.id%>">
                   <%= perk.title %>
                 </a>
               </div>
@@ -34,7 +33,6 @@
                      <% end %>
                  </div>
              </div>
-          </div>
           <% end %>
 <%end%>
 <% if near_me.empty? == false%>
@@ -43,9 +41,8 @@
     <% @perks.each do |perk| %>
         <% if @user.zipcode != perk.zipcode %>
             <div class="perks-list">
-              <div class="panel panel-primary" id="all-perk<%=perk.id%>"
-                <div class='panel-body'>
-                  <a href="/perks/<%= perk.id%>">
+                <div class='panel-body' >
+                  <a class="each-perk" href="/perks/<%= perk.id%>">
                     <%= perk.title %>
                   </a>
                 </div>
@@ -72,7 +69,6 @@
                     <% end %>
                 </div>
               </div>
-            </div>
         <% end %>
     <% end %>
   <br>
