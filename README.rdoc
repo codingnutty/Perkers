@@ -3,23 +3,31 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
+This project Perkers is a Rails application that enables a user to create a perk, view perks based on location and favorite a perk.
+
+Note: The word favorite is spelled wrong throughout the project. :P
+
 Things you may want to cover:
 
-* Ruby version
+* Ruby version : Ruby version 2.0.0,  Rails 4.2.4
 
-* System dependencies
+* Setup
+You can clone this repository typing the following in your terminal
+<pre>
+  git clone https://github.com/codingnutty/perkers.git
+</pre>
+* Once this project is cloned, install all gems required for this project by typing bundle install in your terminal
+* Then setup database and add seed file contents into database
+<pre>
+  bin/rake db:create && db:migrate && db:seed
+</pre>
+or
+<pre>
+  bin/rake db:setup
+</pre>
+Now, start rails server by typing rails s or rails server in terminal.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+You are all ready to go. You will be able to view this project on localhost:3000
 
 * ...
 

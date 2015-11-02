@@ -1,5 +1,12 @@
 require 'rails_helper'
 
+RSpec.describe User, type: :model do
+  context "#associations" do
+  it {should have_many :favourites}
+  it {should have_many :perks}
+  end
+end
+
 describe User do
   describe 'instantiation' do
     let!(:user) { build(:user) }
@@ -18,3 +25,4 @@ describe User do
     expect{no_pswd.save!}.to raise_error{ActiveRecord::RecordInvalid}
   end
 end
+
