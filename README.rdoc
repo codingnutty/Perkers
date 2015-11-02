@@ -13,18 +13,18 @@ Things you may want to cover:
 
 * Setup
 You can clone this repository typing the following in your terminal
-<pre>
+
   git clone https://github.com/codingnutty/perkers.git
-</pre>
+
 * Once this project is cloned, install all gems required for this project by typing bundle install in your terminal
 * Then setup database and add seed file contents into database
-<pre>
+
   bin/rake db:create && db:migrate && db:seed
-</pre>
+
 or
-<pre>
+
   bin/rake db:setup
-</pre>
+
 Now, start rails server by typing rails s or rails server in terminal.
 
 You are all ready to go. You will be able to view this project on localhost:3000
