@@ -19,6 +19,7 @@ class PerksController < ApplicationController
     @perk = Perk.find(params[:id])
     @brand = Brand.find_by(:id => @perk.brand_id)
     @favourites = Favourite.find_by(:perk_id => params[:id])
+    # Attempted to add ajax
     # if request.xhr?
     #   p "I am in xhr"
     #   render partial: 'show', layout: false
@@ -46,6 +47,8 @@ class PerksController < ApplicationController
     @favourites = @perk.favourites.all.order(created_at: :desc)
     respond_to do |format|
       if @perk.save
+        # Attempted to add ajax
+        #####################
         format.html { redirect_to @perk, notice: 'Perk was successfully created.' }
         format.json { render :show, status: :created, location: @perk }
       else
