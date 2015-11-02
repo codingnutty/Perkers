@@ -33,6 +33,6 @@ You are all ready to go. You will be able to view this project on localhost:3000
 
 Pending tasks for this project:
 
-Still working on. Unable to receive response. Hence, trying to debug it.
+* Still working on Ajax. Working on Debugging itit.
 
-Partial tests written. More coming up.
+* Partial tests written. More coming up.
