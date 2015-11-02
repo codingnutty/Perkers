@@ -9,7 +9,10 @@ class ApplicationController < ActionController::Base
      devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :email, :password, :remember_me) }
      devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :name, :email, :password, :password_confirmation, :current_password, :address, :city, :zipcode, :state) }
   end
-    # protect_from_forgery with: :exception
+    protect_from_forgery with: :exception
     before_action :authenticate_user!
+
+    # set up pagination
+    WillPaginate.per_page = 20
 
 end

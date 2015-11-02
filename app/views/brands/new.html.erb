@@ -1,6 +1,7 @@
+<!-- create a new brand only allowed by admin -->
 <% if is_admin? %>
   <h1>New Brand</h1>
-
+<!-- renders partial form to create a new brand -->
   <%= render 'form' %>
 <% else %>
   You are not admin. You do not have adding, editing or deleting permission.

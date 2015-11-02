@@ -1,32 +1,21 @@
+<div class="container">
 <% if user_signed_in? %>
-  <%if current_user.id == @user.id %>
     <h1>hello, <%= @user.username %>!</h1>
-
-    <h4>your current favourite perks:</h4>
-  <%else%>
-    <h1><%= @user.username %>'s profile</h1>
-    <% if is_admin? %>
-      <form method='post' action="/users/<%=@user.id%>">
-        <input type='hidden' name='_method' value='delete'>
-        <input type='submit' value='Delete Profile' class='btn btn-default'>
-      </form>
-    <%end%>
-    <h4>current favourite perks:</h4>
-  <%end%>
-
-
-<%else%>
-  <h1><%= @user.username %>'s profile</h1>
-  <h4>current favourite perks:</h4>
+    <h4>Your current favourite perks:</h4>
 <%end%>
-<div id="columns" data-columns=''>
+<div id="columns" data-columns='1'>
   <% @perks.each do |perk| %>
-    <div class='panel panel-primary'>
-      <div class='panel-body'><a href = '/perks/<%=perk.id%>'><%=perk.title %></a></div>
-      <div class='panel-footer'>
+    <div class='panel panel-primary perks-list '>
+      <div class='panel-body'>
+        <a href = '/perks/<%=perk.id%>'><%=perk.title %></a><br>
+        Discount: <%=perk.discount %><br>
+        Location:<br>
+        <%=perk.city%>,
+        <%=perk.state%>
       </div>
     </div>
   <%end%>
 </div>
 
 <%= link_to 'Back', perks_path %>
+</div>

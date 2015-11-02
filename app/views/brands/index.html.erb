@@ -1,4 +1,5 @@
-<h1>Listing Brands</h1>
+<!-- all brands -->
+<h1>LISTING BRANDS</h1>
     <% @brands.each do |brand| %>
       <div class="panel panel-primary contain" id="brand<%=brand.id %>"
         <div class="panel-body">
@@ -12,7 +13,13 @@
         </div>
       </div>
     <% end %>
-
+<div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @brands %>
+    </div>
+      <%= will_paginate @brands, :container => false %>
+      <%= will_paginate @brands, :page_links => false %>
+</div>
 
 <br>
 <% if is_admin? %>

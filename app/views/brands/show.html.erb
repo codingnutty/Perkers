@@ -1,6 +1,8 @@
-<div class="container">
+<!-- display each brand -->
+<h1><%= @brand.brand_name.upcase %></h1>
+  <h4>Brand Details </h4>
+<div class="contain">
     Brand : <%=  @brand.brand_name %><br>
-
     <% if @perk != nil %>
       Perk : <%= @perk.title %><br>
       Discount : <%= @perk.discount %><br>

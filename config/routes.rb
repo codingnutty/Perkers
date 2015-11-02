@@ -9,19 +9,17 @@ Rails.application.routes.draw do
   root 'perks#index'
 
   resources :perk_categories
-  resources :perks do
-    resources :favourites
-  end
+  resources :perks
   resources :brands do
     scope module: "brand_scope" do
         resources :perks
     end
   end
   resources :categories
-  resources :users do
-  end
+  resources :users
 
-  # resources :favourites
+
+  resources :favourites, only: [:index, :create, :destroy]
 
 
   # Example of regular route:

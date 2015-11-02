@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(version: 20151030195125) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "cat_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "favourites", force: :cascade do |t|

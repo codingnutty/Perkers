@@ -5,18 +5,23 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create!(:name => "Admin", :username => "admin1234", :email => "admin@gmail.com", :password => "adminadmin", :address => "FFaker::AddressUS.street_address",:city => FFaker::AddressUS.city,
-    :state => FFaker::AddressUS.state_abbr,
-    :zipcode => FFaker::AddressUS.zip_code)
 
 require 'faker'
 
-User.delete_all
-Perk.delete_all
-Brand.delete_all
-Category.delete_all
+User.create!(:name => "Admin", :username => "admin1234", :email => "admin@gmail.com", :password => "adminadmin", :address => "633 Folsom Street",:city => "San Francisco",
+    :state => "CA",
+    :zipcode => "94107")
 
-users = 9.times do
+User.create!(:name => "Katie Thomas", :username => "kat6247", :email => "katie@gmail.com", :password => "katiekatie", :address => "115 Mills Ave",:city => "San Francisco",
+    :state => "CA",
+    :zipcode => "94107")
+
+User.create!(:name => "Mary Jone", :username => "maryjones", :email => "mary@gmail.com", :password => "marymary", :address => "620 Folsom Street",:city => "San Francisco",
+    :state => "CA",
+    :zipcode => " 94107")
+
+
+users = 7.times do
   User.create!( :name => Faker::Name.name,
     :username => Faker::Internet.user_name,
     :email => Faker::Internet.email,
@@ -31,8 +36,36 @@ brands = 10.times do
   Brand.create!(:brand_name => FFaker::Product.brand )
 end
 
+random_brand = rand(1.. Brand.count)
+Perk.create!( :title => "Hot Stone Massage",
+    :discount => rand(1...80),
+    :address => "200 Folsom Street",
+    :city => "San Francisco",
+    :state => "CA",
+    :zipcode => " 94107",
+    :brand_id => random_brand )
 
-perks = 10.times do
+random_brand = rand(1.. Brand.count)
+Perk.create!( :title => "Sky diving",
+    :discount => rand(1...80),
+    :address => "20 Folsom Street",
+    :city => "San Francisco",
+    :state => "CA",
+    :zipcode => " 94107",
+    :brand_id => random_brand )
+
+random_brand = rand(1.. Brand.count)
+Perk.create!( :title => "Fine Dine at Sky View",
+    :discount => rand(1...80),
+    :address => "200 Broadway Street",
+    :city => "San Francisco",
+    :state => "CA",
+    :zipcode => " 94107",
+    :brand_id => random_brand )
+
+
+
+perks = 7.times do
   random_brand = rand(1.. Brand.count)
   Perk.create!( :title => FFaker::Product.product_name,
     :discount => rand(1...80),
@@ -44,7 +77,7 @@ perks = 10.times do
 end
 
 categories = 10.times do
-  Category.create!(:cat_name => Faker::Commerce.department )
+  Category.create!(:cat_name => Faker::Commerce.department,:description => Faker::Company.bs )
 end
 
 perk_categories = 10.times do

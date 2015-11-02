@@ -4,17 +4,15 @@ class PerksController < ApplicationController
   # GET /perks
   # GET /perks.json
   def index
-    @perks = Perk.all
+    # Tried to paginate manually until I found a cool gem that does it for me
+    # start = 0
+    # stop = 19
+    # @perks = Perk.all.order(created_at: :desc)[start..stop]
+    @perks = Perk.all.order(created_at: :desc).paginate(:page => params[:page])
     @user = current_user
     @user_perks = @user.perks.all
-
-    # if request.xhr?
-    #   @perks = Perk.all.order(created_at: :desc)
-    #   render '_allperks.json', layout: false
-    # else
-    #   render 'index'
-    # end
   end
+
   # GET /perks/1
   # GET /perks/1.json
   def show
@@ -30,6 +28,7 @@ class PerksController < ApplicationController
 
   # GET /perks/1/edit
   def edit
+    @perk = Perk.find(params[:id])
   end
 
   # POST /perks
@@ -53,7 +52,7 @@ class PerksController < ApplicationController
   # PATCH/PUT /perks/1
   # PATCH/PUT /perks/1.json
   def update
-
+    @perk = Perk.find(params[:id])
     respond_to do |format|
       if @perk.update(perk_params)
         format.html { redirect_to @perk, notice: 'Perk was successfully updated.' }

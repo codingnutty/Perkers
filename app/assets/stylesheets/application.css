@@ -162,4 +162,8 @@ div.main {
   width:50em;
   margin-left:25%;
   margin-right:25%;
+  padding:10px;
+  width: 50em;
+  height:7em;
+  border: 1px solid black;
 }

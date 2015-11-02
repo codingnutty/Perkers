@@ -12,12 +12,12 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
             <span id ="user">Logged in as <%= current_user.username %></span>
-            <li> <%= link_to 'profile', user_path(current_user), :class => 'navbar-link' %></li>
-             <li> <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
-              <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+            <li> <%= link_to 'profile', user_path(current_user), :class => 'navbar-link', :id => 'profile' %></li>
+             <li> <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link', :id => 'profile_edit'  %></li>
+              <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link', :id => 'logout'  %></li>
           <% else %>
-             <li> <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
-             <li> <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+             <li> <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'%></li>
+             <li> <%= link_to "Login", new_user_session_path, :class => 'navbar-link'%></li>
           <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -4,7 +4,7 @@ class BrandsController < ApplicationController
   # GET /brands
   # GET /brands.json
   def index
-    @brands = Brand.all
+    @brands = Brand.all.paginate(:page => params[:page],:per_page => 20)
   end
 
   # GET /brands/1
@@ -21,6 +21,7 @@ class BrandsController < ApplicationController
 
   # GET /brands/1/edit
   def edit
+    @brand = Brand.find(params[:id])
   end
 
   # POST /brands
@@ -42,6 +43,7 @@ class BrandsController < ApplicationController
   # PATCH/PUT /brands/1
   # PATCH/PUT /brands/1.json
   def update
+    @brand = Brand.find(params[:id])
     respond_to do |format|
       if @brand.update(brand_params)
         format.html { redirect_to @brand, notice: 'Brand was successfully updated.' }

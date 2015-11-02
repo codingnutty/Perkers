@@ -1,8 +1,10 @@
 <article class="all-perks">
-<h1>Listing Perks near you</h1>
-    <% @perks.each do |perk| %>
-        <% if @user.zipcode == perk.zipcode %>
+<h1>WE FOUND PERKS AROUND YOU!! </h1>
+<% if near_me.empty? %>
+  <h4>Sorry! There are no perks available near you. Below are all perks you can avail.</h4>
+<%else%>
 
+    <% near_me[0..5].each do |perk| %>
           <div  class="perks-list">
             <div class="panel panel-primary" id="loc-perk<%=perk.id %>"
               <div class='panel-body'>
@@ -10,8 +12,9 @@
                   <%= perk.title %>
                 </a>
               </div>
-
-                  <%= perk.discount %> %
+                  <%= perk.discount %> % off <br>
+                  <%=perk.city %>,
+                  <%= perk.state%>
                   <div class='panel' style='border: none;'>
                     <% if @errors %>
                     <h3><%= @errors %></h3>
@@ -19,8 +22,11 @@
                   </div>
                  <div class='panel-footer'>
                      <% if current_user %>
-                      <%= render partial: '/favourites/favourite_button', locals: {perk: perk} %>
-                      <%= render partial: '/favourites/unfavourite_button', locals: {perk: perk } %>
+                        <% unless @user.perks.include?(perk) %>
+                           <%= render partial: '/favourites/favourite_button', locals: {perk: perk} %>
+                        <% else %>
+                          <%= render partial: '/favourites/unfavourite_button', locals: {perk: perk } %>
+                        <% end %>
                      <% end %>
                      <% if is_admin? %>
                         <%= link_to 'Edit', edit_perk_path(perk) %>
@@ -30,8 +36,10 @@
              </div>
           </div>
           <% end %>
-    <% end %>
- <h1>Listing all Perks</h1>
+<%end%>
+<% if near_me.empty? == false%>
+ <h1>ALL PERKS</h1>
+ <% end %>
     <% @perks.each do |perk| %>
         <% if @user.zipcode != perk.zipcode %>
             <div class="perks-list">
@@ -41,7 +49,9 @@
                     <%= perk.title %>
                   </a>
                 </div>
-                    <%= perk.discount %> % </td>
+                    <%= perk.discount %> % <br>
+                    <%=perk.city %>,
+                    <%= perk.state%>
                     <div class='panel' style='border: none;'>
                       <% if @errors %>
                         <h3><%= @errors %></h3>
@@ -49,9 +59,11 @@
                     </div>
                 <div class='panel-footer'>
                      <% if current_user %>
-                      <%= render partial: '/favourites/favourite_button', locals: {perk: perk} %>
-                      <%= render partial: '/favourites/unfavourite_button', locals: {perk: perk}%>
-
+                        <% unless @user.perks.include?(perk) %>
+                           <%= render partial: '/favourites/favourite_button', locals: {perk: perk} %>
+                        <% else %>
+                          <%= render partial: '/favourites/unfavourite_button', locals: {perk: perk } %>
+                        <% end %>
                      <% end %>
 
                     <% if is_admin? %>
@@ -63,11 +75,16 @@
             </div>
         <% end %>
     <% end %>
-<% if is_admin? %>
   <br>
   <br>
-  <button class ="btn-lg">
+  <button class ="btn-lg" id="new_perk">
     <%= link_to 'Add Perk', new_perk_path(@perks) %>
   </button>
-<% end %>
+<div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @perks %>
+    </div>
+    <%= will_paginate @perks, :container => false %>
+    <%= will_paginate @perks, :page_links => false %>
+</div>
 </article>

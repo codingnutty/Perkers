@@ -1,14 +1,18 @@
+<h1><%= @perk.title.upcase %></h1>
+<h4>Perk Details </h4>
+<div class="contain">
 <% if @brand != nil || @perk != nil %>
   Perk title: <%= @perk.title %><br>
+  Brand: <%= @brand.brand_name %><br>
   Discount: <%= @perk.discount %> %<br>
-  Location:<br>
-  <%= @perk.city %><br>
+  Location:
+  <%= @perk.city %>,
   <%= @perk.state %><br>
-  <%= @brand.brand_name %>
+
 <% else %>
   Sorry No Perks Here! Try again some other time.
 <% end %>
-
+</div>
 
  <div class='text-center'>
   <div class='panel' style='border: none;'>

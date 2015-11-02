@@ -1,5 +1,9 @@
-<div class="container">
-  <% if @brand != nil || @perk != nil %>
+<!-- display each category -->
+<h1><%= @category.cat_name.upcase %></h1>
+<h4>Category Details </h4>
+
+<div class="contain">
+  <% if @brand != nil && @perk != nil %>
     Brand: <%= @brand.brand_name %><br>
     Perk:<%=@perk.title %><br>
     Discount:<%=@perk.discount %>% <br>
